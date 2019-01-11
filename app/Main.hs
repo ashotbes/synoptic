@@ -1,5 +1,7 @@
 module Main where
 
+import           Data.Text.IO as TIO
+
 import           AskWeather      (askWeather)
 import           GettingUserDate (getLanguageFromUser, getUserData,
                                   reportAboutProblem)
@@ -14,4 +16,4 @@ main = do
         Right (date, city) -> do
             response <- askWeather (date, city)
             let answer = prepareAnswer lang response date
-            print answer
+            TIO.putStrLn answer

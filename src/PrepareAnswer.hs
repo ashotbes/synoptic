@@ -60,8 +60,18 @@ prepareMainInfo = main
 
 showInfo :: Language -> MainWeatherInfo -> Text
 showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ _ _ ) =
-   pack $ show (messageForUser lang MessageForecast) ++ show ( kToC $ (round $ temp1)) ++ " C, pressure: " ++ show pressure1 ++ " mm hg"
+   messageForUser lang MessageForecast <> messageForUser lang MessageAboutTemperature
+   <> (intToText $ kToC $ (round $ temp1 )) <> "°"
+   <> messageForUser lang MessageAboutPressure <> (intToText $ prConversion $ pressure1)
+   <> messageForUser lang PressureDesignation
+
 -- Кельвин в Цельсий
 
 kToC :: Int -> Int
 kToC kel = kel - 273
+
+intToText :: Int -> Text
+intToText = Data.Text.pack . show
+
+prConversion :: Double -> Int
+prConversion pres = round $ (pres / 1.333)

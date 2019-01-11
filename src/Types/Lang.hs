@@ -4,6 +4,9 @@ data MessageForUser
    = MessageChooseForecastDate
    | MessageChooseForecastCity
    | MessageForecast
+   | MessageAboutTemperature
+   | MessageAboutPressure
+   | PressureDesignation
    | MessageErrorWrongDate
    | MessageErrorWrongCity
    | MessageUnexpectedError

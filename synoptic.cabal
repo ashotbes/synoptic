@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3f431f2e1e70d867322aeebb8c38589fd00a763fd75d54339532a2ceaeba0a62
+-- hash: f344639ac08f7aea9a2ad82694612b507c852dbb8779ca46b69d2c0ae1e39b34
 
 name:           synoptic
 version:        0.1.0.0
@@ -15,10 +17,9 @@ copyright:      2018 Ashot
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git
