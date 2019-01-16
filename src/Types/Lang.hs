@@ -7,6 +7,7 @@ data MessageForUser
    | MessageAboutTemperature
    | MessageAboutPressure
    | PressureDesignation
+   | Humidity
    | MessageErrorWrongDate
    | MessageErrorWrongCity
    | MessageUnexpectedError

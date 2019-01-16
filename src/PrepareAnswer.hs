@@ -59,11 +59,12 @@ prepareMainInfo = main
 -- Показываем информацию о погоде
 
 showInfo :: Language -> MainWeatherInfo -> Text
-showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ _ _ ) =
+showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) =
    messageForUser lang MessageForecast <> messageForUser lang MessageAboutTemperature
    <> (intToText $ kToC $ (round $ temp1 )) <> "°"
    <> messageForUser lang MessageAboutPressure <> (intToText $ prConversion $ pressure1)
    <> messageForUser lang PressureDesignation
+   <> messageForUser lang Humidity <> ( intToText $ humidity1 ) <> "%"
 
 -- Кельвин в Цельсий
 
