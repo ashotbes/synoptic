@@ -14,13 +14,14 @@ import           Network.HTTP.Client   (Response, responseBody)
 import           GettingUserDate
 import           Types.FullWeatherInfo
 import           Types.Lang
+import           Types.City
 
 -- Функция,которая выдает строку с информацией о погоде
 
-prepareAnswer :: Language -> Response BSL.ByteString -> UTCTime -> Text
-prepareAnswer lang response dateFromUser = finalPhrase
+prepareAnswer :: Language -> Response BSL.ByteString -> UTCTime -> City -> Text
+prepareAnswer lang response dateFromUser cityFromUser = finalPhrase
     where
-      finalPhrase    = showInfo lang forecastToMain
+      finalPhrase    = showInfo lang forecastToMain cityFromUser dateFromUser
       forecastToMain = prepareMainInfo oneForecast
       oneForecast    = findOurForecast listOfForecast dateFromUser
       listOfForecast = extractListOfForecasts (fromJust weatherValues)
@@ -56,11 +57,16 @@ findOurForecast allForecasts dateFromUser =
 prepareMainInfo :: InfoAboutForecast -> MainWeatherInfo
 prepareMainInfo = main
 
+cityToText :: City -> Text
+cityToText = Data.Text.pack . show
+
 -- Показываем информацию о погоде
 
-showInfo :: Language -> MainWeatherInfo -> Text
-showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) =
-   messageForUser lang MessageForecast <> messageForUser lang MessageAboutTemperature
+showInfo :: Language -> MainWeatherInfo -> City -> UTCTime -> Text
+showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) cityFromUser dateFromUser =
+   messageForUser lang MessageForecast <> ( cityToText $ cityFromUser ) <> messageForUser lang On
+   <> ( Data.Text.take 10 $ utcTimeToText $ dateFromUser) <> ": "
+   <> messageForUser lang MessageAboutTemperature
    <> (intToText $ kToC $ (round $ temp1 )) <> "°"
    <> messageForUser lang MessageAboutPressure <> (intToText $ prConversion $ pressure1)
    <> messageForUser lang PressureDesignation
@@ -73,6 +79,9 @@ kToC kel = kel - 273
 
 intToText :: Int -> Text
 intToText = Data.Text.pack . show
+
+utcTimeToText :: UTCTime -> Text
+utcTimeToText = Data.Text.pack . show
 
 prConversion :: Double -> Int
 prConversion pres = round $ (pres / 1.333)

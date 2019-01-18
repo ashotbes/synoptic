@@ -33,6 +33,11 @@ messageForUser En messageInEn = showMessageInEnglish  messageInEn
 messageForUser Ru messageInRu = showMessageInRussian  messageInRu
 messageForUser Am messageInAm = showMessageInArmenian messageInAm
 
+citiesForUser :: Language -> City -> Text
+citiesForUser En messageInEn = showCityInEnglish  messageInEn
+citiesForUser Ru messageInRu = showCityInRussian  messageInRu
+citiesForUser Am messageInAm = showCityInArmenian messageInAm
+
 -- функция округления
 
 round' :: NominalDiffTime -> Integer
@@ -44,8 +49,8 @@ round' mark
 
 -- Список городов
 
-supportedCities :: [City]
-supportedCities = [Aragatsotn .. Yerevan]
+supportedCities :: Language -> [Text]
+supportedCities lang = Prelude.map (citiesForUser lang) [Aragatsotn .. Yerevan]
 
 getLanguageFromUser :: IO Language
 getLanguageFromUser = do
@@ -97,9 +102,8 @@ getDateFromUser lang = do
 getCityFromUser :: Language -> IO (Maybe City)
 getCityFromUser lang = do
     TIO.putStrLn $ messageForUser lang MessageChooseForecastCity
-    print [Aragatsotn .. Yerevan]
     cityFromUser <- Prelude.getLine
-    let cityAsString = Prelude.map show supportedCities
+    let cityAsString = Prelude.map show (supportedCities lang)
     if cityFromUser `elem` cityAsString
        then return $ Just (read cityFromUser :: City)
        else return Nothing

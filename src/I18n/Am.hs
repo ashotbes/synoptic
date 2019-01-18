@@ -5,11 +5,26 @@ module I18n.Am where
 import           Data.Text
 
 import           Types.Lang
+import           Types.City
+
+showCityInArmenian :: City -> Text
+showCityInArmenian Aragatsotn  = "Արագածոտն"
+showCityInArmenian Ararat      = "Արարատ"
+showCityInArmenian Armavir     = "Արմավիր"
+showCityInArmenian Dilijan     = "Դիլիջան"
+showCityInArmenian Gegharkunik = "Գեղարքունիք"
+showCityInArmenian Gyumri      = "Գյումրի"
+showCityInArmenian Kotayk      = "Կոտայք"
+showCityInArmenian Shirak      = "Շիրակ"
+showCityInArmenian Syunik      = "Սյունիք "
+showCityInArmenian Vanadzor    = "Վանաձոր "
+showCityInArmenian Yerevan     = "Երեւան"
 
 showMessageInArmenian :: MessageForUser -> Text
 showMessageInArmenian MessageChooseForecastDate = "Նշեք կանխատեսման ամսաթիվը"
 showMessageInArmenian MessageChooseForecastCity = "Նշեք քաղաքը կանխատեսման համար"
 showMessageInArmenian MessageForecast           = "Եղանակի մասին տեղեկություններ: "
+showMessageInArmenian On                        = ""
 showMessageInArmenian MessageAboutTemperature   = "Ջերմաստիճանը: "
 showMessageInArmenian MessageAboutPressure      = " Ճնշումը: "
 showMessageInArmenian PressureDesignation       = " տոր "
