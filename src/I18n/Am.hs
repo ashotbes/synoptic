@@ -33,15 +33,15 @@ showMessageInArmenian MessageErrorWrongDate     = "Դուք անվավեր ամ�
 showMessageInArmenian MessageErrorWrongCity     = "Դուք մուտքագրել եք անվավեր քաղաք"
 showMessageInArmenian MessageUnexpectedError    = "Ինչ որ բան այնպես չգնաց"
 
-convertCityInArmenian :: Text -> City
-convertCityInArmenian "Արագածոտն"   = Aragatsotn
-convertCityInArmenian "Արարատ"      = Ararat
-convertCityInArmenian "Արմավիր"     = Armavir
-convertCityInArmenian "Դիլիջան"     = Dilijan
-convertCityInArmenian "Գեղարքունիք" = Gegharkunik
-convertCityInArmenian "Գյումրի"     = Gyumri
-convertCityInArmenian "Կոտայք"      = Kotayk
-convertCityInArmenian "Շիրակ"       = Shirak
-convertCityInArmenian "Սյունիք"     = Syunik
-convertCityInArmenian "Վանաձոր"     = Vanadzor
-convertCityInArmenian "Երեւան"      = Yerevan
+cityInArmenian :: Text -> City
+cityInArmenian "Արագածոտն"   = Aragatsotn
+cityInArmenian "Արարատ"      = Ararat
+cityInArmenian "Արմավիր"     = Armavir
+cityInArmenian "Դիլիջան"     = Dilijan
+cityInArmenian "Գեղարքունիք" = Gegharkunik
+cityInArmenian "Գյումրի"     = Gyumri
+cityInArmenian "Կոտայք"      = Kotayk
+cityInArmenian "Շիրակ"       = Shirak
+cityInArmenian "Սյունիք"     = Syunik
+cityInArmenian "Վանաձոր"     = Vanadzor
+cityInArmenian "Երեւան"      = Yerevan
