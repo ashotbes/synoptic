@@ -41,7 +41,7 @@ citiesForUser Am messageInAm = showCityInArmenian messageInAm
 textToCity :: Language -> Text -> City
 textToCity En cityInEn = cityInEnglish  cityInEn
 textToCity Ru cityInRu = cityInRussian  cityInRu
-textToCity Am cityInAm = ityInArmenian cityInAm
+textToCity Am cityInAm = cityInArmenian cityInAm
 
 -- функция округления
 
