@@ -6,7 +6,7 @@ module GettingUserDate where
 import           Data.Either      (fromLeft, isLeft, rights)
 import           Data.Maybe       (fromJust, isNothing)
 import           Data.Text
-import           Data.Text.IO     as TIO (putStrLn)
+import           Data.Text.IO     as TIO
 import           Data.Time        (getCurrentTime)
 import           Data.Time.Clock  (NominalDiffTime, UTCTime, diffUTCTime)
 import           Data.Time.Format (defaultTimeLocale, parseTimeM)
@@ -38,6 +38,11 @@ citiesForUser En messageInEn = showCityInEnglish  messageInEn
 citiesForUser Ru messageInRu = showCityInRussian  messageInRu
 citiesForUser Am messageInAm = showCityInArmenian messageInAm
 
+textToCity :: Language -> Text -> City
+textToCity En cityInEn = convertCityInEnglish  cityInEn
+textToCity Ru cityInRu = convertCityInRussian  cityInRu
+textToCity Am cityInAm = convertCityInArmenian cityInAm
+
 -- функция округления
 
 round' :: NominalDiffTime -> Integer
@@ -55,7 +60,7 @@ supportedCities lang = Prelude.map (citiesForUser lang) [Aragatsotn .. Yerevan]
 getLanguageFromUser :: IO Language
 getLanguageFromUser = do
    Prelude.putStrLn "Please,select language!  Ru | En | Am"
-   lang <- getLine
+   lang <- TIO.getLine
    if lang == "Ru" || lang == "ru"
      then return Ru
      else
@@ -102,8 +107,8 @@ getDateFromUser lang = do
 getCityFromUser :: Language -> IO (Maybe City)
 getCityFromUser lang = do
     TIO.putStrLn $ messageForUser lang MessageChooseForecastCity
-    cityFromUser <- Prelude.getLine
-    let cityAsString = Prelude.map show (supportedCities lang)
-    if cityFromUser `elem` cityAsString
-       then return $ Just (read cityFromUser :: City)
+  --  TIO.putStrLn $ supportedCities lang
+    cityFromUser <- TIO.getLine
+    if cityFromUser `elem` supportedCities lang
+       then return $ Just (textToCity lang cityFromUser)
        else return Nothing

@@ -32,3 +32,16 @@ showMessageInEnglish Humidity                  = "Humidity: "
 showMessageInEnglish MessageErrorWrongDate     = "You entered an invalid Date!"
 showMessageInEnglish MessageErrorWrongCity     = "You entered an invalid City!"
 showMessageInEnglish MessageUnexpectedError    = "Something went wrong"
+
+cityInEnglish :: Text -> City
+cityInEnglish "Yerevan"  = Yerevan
+cityInEnglish "Ararat"      = Ararat
+cityInEnglish "Armavir"     = Armavir
+cityInEnglish "Dilijan"     = Dilijan
+cityInEnglish "Gegharkunik" = Gegharkunik
+cityInEnglish "Gyumri"      = Gyumri
+cityInEnglish "Kotayk"      = Kotayk
+cityInEnglish "Shirak"      = Shirak
+cityInEnglish "Syunik "     = Syunik
+cityInEnglish "Vanadzor"    = Vanadzor
+cityInEnglish "Aragatsotn"  = Aragatsotn

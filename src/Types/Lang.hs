@@ -15,4 +15,4 @@ data MessageForUser
    deriving (Show)
 
 data Language = En | Ru | Am
-              deriving (Show)
+              deriving (Read, Enum, Eq, Ord, Show)

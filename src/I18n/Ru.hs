@@ -31,3 +31,16 @@ showMessageInRussian Humidity                  = "Относительная в�
 showMessageInRussian MessageErrorWrongDate     = "Вы ввели неверную дату,пожалуйста исправьте её!"
 showMessageInRussian MessageErrorWrongCity     = "Вы ввели неверный город,пожалуйста,укажите город из списка!"
 showMessageInRussian MessageUnexpectedError    = "Что-то пошло не так)"
+
+cityInRussian :: Text -> City
+cityInRussian "Арагацотн" = Aragatsotn
+cityInRussian "Арарат"     = Ararat
+cityInRussian "Армавир"    = Armavir
+cityInRussian "Дилижан"    = Dilijan
+cityInRussian "Гехаркуник" = Gegharkunik
+cityInRussian "Гюмри"      = Gyumri
+cityInRussian "Котайк"     = Kotayk
+cityInRussian "Ширак"      = Shirak
+cityInRussian "Сюник"      = Syunik
+cityInRussian "Ванадзор"   = Vanadzor
+cityInRussian "Ереван"     = Yerevan

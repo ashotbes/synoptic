@@ -16,8 +16,8 @@ showCityInArmenian Gegharkunik = "Գեղարքունիք"
 showCityInArmenian Gyumri      = "Գյումրի"
 showCityInArmenian Kotayk      = "Կոտայք"
 showCityInArmenian Shirak      = "Շիրակ"
-showCityInArmenian Syunik      = "Սյունիք "
-showCityInArmenian Vanadzor    = "Վանաձոր "
+showCityInArmenian Syunik      = "Սյունիք"
+showCityInArmenian Vanadzor    = "Վանաձոր"
 showCityInArmenian Yerevan     = "Երեւան"
 
 showMessageInArmenian :: MessageForUser -> Text
@@ -32,3 +32,16 @@ showMessageInArmenian Humidity                  = "Խոնավությունը: "
 showMessageInArmenian MessageErrorWrongDate     = "Դուք անվավեր ամսաթիվ եք մուտքագրել, ուղղեք այն:"
 showMessageInArmenian MessageErrorWrongCity     = "Դուք մուտքագրել եք անվավեր քաղաք"
 showMessageInArmenian MessageUnexpectedError    = "Ինչ որ բան այնպես չգնաց"
+
+convertCityInArmenian :: Text -> City
+convertCityInArmenian "Արագածոտն"   = Aragatsotn
+convertCityInArmenian "Արարատ"      = Ararat
+convertCityInArmenian "Արմավիր"     = Armavir
+convertCityInArmenian "Դիլիջան"     = Dilijan
+convertCityInArmenian "Գեղարքունիք" = Gegharkunik
+convertCityInArmenian "Գյումրի"     = Gyumri
+convertCityInArmenian "Կոտայք"      = Kotayk
+convertCityInArmenian "Շիրակ"       = Shirak
+convertCityInArmenian "Սյունիք"     = Syunik
+convertCityInArmenian "Վանաձոր"     = Vanadzor
+convertCityInArmenian "Երեւան"      = Yerevan
