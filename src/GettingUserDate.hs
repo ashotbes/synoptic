@@ -6,7 +6,7 @@ module GettingUserDate where
 import           Data.Either      (fromLeft, isLeft, rights)
 import           Data.Maybe       (fromJust, isNothing)
 import           Data.Text
-import           Data.Text.IO     as TIO (putStrLn)
+import           Data.Text.IO     as TIO (getLine, putStrLn)
 import           Data.Time        (getCurrentTime)
 import           Data.Time.Clock  (NominalDiffTime, UTCTime, diffUTCTime)
 import           Data.Time.Format (defaultTimeLocale, parseTimeM)
@@ -55,7 +55,7 @@ supportedCities lang = Prelude.map (citiesForUser lang) [Aragatsotn .. Yerevan]
 getLanguageFromUser :: IO Language
 getLanguageFromUser = do
    Prelude.putStrLn "Please,select language!  Ru | En | Am"
-   lang <- getLine
+   lang <- Prelude.getLine
    if lang == "Ru" || lang == "ru"
      then return Ru
      else
@@ -102,8 +102,7 @@ getDateFromUser lang = do
 getCityFromUser :: Language -> IO (Maybe City)
 getCityFromUser lang = do
     TIO.putStrLn $ messageForUser lang MessageChooseForecastCity
-    cityFromUser <- Prelude.getLine
-    let cityAsString = Prelude.map show (supportedCities lang)
-    if cityFromUser `elem` cityAsString
+    cityFromUser <- TIO.getLine
+    if cityFromUser `elem` supportedCities lang
        then return $ Just (read cityFromUser :: City)
        else return Nothing
