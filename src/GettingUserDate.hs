@@ -1,5 +1,5 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE MultiWayIf        #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module GettingUserDate where
 
@@ -107,7 +107,7 @@ getDateFromUser lang = do
 getCityFromUser :: Language -> IO (Maybe (Maybe City))
 getCityFromUser lang = do
     TIO.putStrLn $ messageForUser lang MessageChooseForecastCity
-    TIO.putStrLn $ supportedCities lang
+    TIO.putStrLn $ Data.Text.intercalate ", " $ supportedCities lang
     cityFromUser <- TIO.getLine
     if cityFromUser `elem` supportedCities lang
        then return $ Just (textToCity lang cityFromUser)
