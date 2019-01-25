@@ -1,3 +1,4 @@
+{-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module I18n.En where
@@ -33,15 +34,17 @@ showMessageInEnglish MessageErrorWrongDate     = "You entered an invalid Date!"
 showMessageInEnglish MessageErrorWrongCity     = "You entered an invalid City!"
 showMessageInEnglish MessageUnexpectedError    = "Something went wrong"
 
-cityInEnglish :: Text -> City
-cityInEnglish "Yerevan"  = Yerevan
-cityInEnglish "Ararat"      = Ararat
-cityInEnglish "Armavir"     = Armavir
-cityInEnglish "Dilijan"     = Dilijan
-cityInEnglish "Gegharkunik" = Gegharkunik
-cityInEnglish "Gyumri"      = Gyumri
-cityInEnglish "Kotayk"      = Kotayk
-cityInEnglish "Shirak"      = Shirak
-cityInEnglish "Syunik "     = Syunik
-cityInEnglish "Vanadzor"    = Vanadzor
-cityInEnglish "Aragatsotn"  = Aragatsotn
+cityInEnglish :: Text -> Maybe City
+cityInEnglish city =
+  if | city == "Yerevan"    -> Just Yerevan
+     | city == "Ararat"     -> Just Ararat
+     | city == "Armavir"    -> Just Armavir
+     | city == "Dilijan"    -> Just Dilijan
+     | city == "Gegharkunik"-> Just Gegharkunik
+     | city == "Gyumri"     -> Just Gyumri
+     | city == "Kotayk"     -> Just Kotayk
+     | city == "Shirak"     -> Just Shirak
+     | city == "Syunik "    -> Just Syunik
+     | city == "Vanadzor"   -> Just Vanadzor
+     | city == "Aragatsotn" -> Just Aragatsotn
+     | otherwise            -> Nothing

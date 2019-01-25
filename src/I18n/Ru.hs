@@ -1,3 +1,4 @@
+{-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module I18n.Ru where
@@ -19,6 +20,20 @@ showCityInRussian Syunik      = "Сюник"
 showCityInRussian Vanadzor    = "Ванадзор"
 showCityInRussian Yerevan     = "Ереван"
 
+cityInRussian :: Text -> Maybe City
+cityInRussian city =
+ if | city == "Арагацотн"  -> Just Aragatsotn
+    | city == "Арарат"     -> Just  Ararat
+    | city == "Армавир"    -> Just  Armavir
+    | city == "Дилижан"    -> Just  Dilijan
+    | city == "Гехаркуник" -> Just  Gegharkunik
+    | city == "Гюмри"      -> Just  Gyumri
+    | city == "Котайк"     -> Just  Kotayk
+    | city == "Ширак"      -> Just  Shirak
+    | city == "Ванадзор"   -> Just  Vanadzor
+    | city == "Ереван"     -> Just  Yerevan
+    | otherwise            -> Nothing 
+
 showMessageInRussian :: MessageForUser -> Text
 showMessageInRussian MessageChooseForecastDate = "Пожалуйста, укажите дату прогноза!"
 showMessageInRussian MessageChooseForecastCity = "Пожалуйста, укажите город!"
@@ -31,16 +46,3 @@ showMessageInRussian Humidity                  = "Относительная в�
 showMessageInRussian MessageErrorWrongDate     = "Вы ввели неверную дату,пожалуйста исправьте её!"
 showMessageInRussian MessageErrorWrongCity     = "Вы ввели неверный город,пожалуйста,укажите город из списка!"
 showMessageInRussian MessageUnexpectedError    = "Что-то пошло не так)"
-
-cityInRussian :: Text -> City
-cityInRussian "Арагацотн" = Aragatsotn
-cityInRussian "Арарат"     = Ararat
-cityInRussian "Армавир"    = Armavir
-cityInRussian "Дилижан"    = Dilijan
-cityInRussian "Гехаркуник" = Gegharkunik
-cityInRussian "Гюмри"      = Gyumri
-cityInRussian "Котайк"     = Kotayk
-cityInRussian "Ширак"      = Shirak
-cityInRussian "Сюник"      = Syunik
-cityInRussian "Ванадзор"   = Vanadzor
-cityInRussian "Ереван"     = Yerevan

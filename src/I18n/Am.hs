@@ -1,3 +1,4 @@
+{-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module I18n.Am where
@@ -33,15 +34,16 @@ showMessageInArmenian MessageErrorWrongDate     = "Դուք անվավեր ամ�
 showMessageInArmenian MessageErrorWrongCity     = "Դուք մուտքագրել եք անվավեր քաղաք"
 showMessageInArmenian MessageUnexpectedError    = "Ինչ որ բան այնպես չգնաց"
 
-cityInArmenian :: Text -> City
-cityInArmenian "Արագածոտն"   = Aragatsotn
-cityInArmenian "Արարատ"      = Ararat
-cityInArmenian "Արմավիր"     = Armavir
-cityInArmenian "Դիլիջան"     = Dilijan
-cityInArmenian "Գեղարքունիք" = Gegharkunik
-cityInArmenian "Գյումրի"     = Gyumri
-cityInArmenian "Կոտայք"      = Kotayk
-cityInArmenian "Շիրակ"       = Shirak
-cityInArmenian "Սյունիք"     = Syunik
-cityInArmenian "Վանաձոր"     = Vanadzor
-cityInArmenian "Երեւան"      = Yerevan
+cityInArmenian :: Text -> Maybe City
+cityInArmenian city =
+   if | city == "Արագածոտն"   -> Just Aragatsotn
+      | city == "Արարատ"      -> Just Ararat
+      | city == "Արմավիր"     -> Just Armavir
+      | city == "Դիլիջան"     -> Just Dilijan
+      | city == "Գեղարքունիք" -> Just Gegharkunik
+      | city == "Գյումրի"     -> Just Gyumri
+      | city == "Կոտայք"      -> Just Kotayk
+      | city ==  "Սյունիք"    -> Just Syunik
+      | city == "Վանաձոր"     -> Just Vanadzor
+      | city == "Երեւան"      -> Just Yerevan
+      | otherwise             -> Nothing

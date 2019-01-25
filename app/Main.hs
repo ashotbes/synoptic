@@ -13,7 +13,7 @@ main = do
     userData <- getUserData lang
     case userData of
         Left problem -> reportAboutProblem lang problem
-        Right (date, city) -> do
+        Right (date,city) -> do
             response <- askWeather (date, city)
             let answer = prepareAnswer lang response date city
             TIO.putStrLn answer

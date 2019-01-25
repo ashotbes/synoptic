@@ -1,5 +1,5 @@
-{-# LANGUAGE MultiWayIf        #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE MultiWayIf        #-}
 
 module GettingUserDate where
 
@@ -38,10 +38,10 @@ citiesForUser En messageInEn = showCityInEnglish  messageInEn
 citiesForUser Ru messageInRu = showCityInRussian  messageInRu
 citiesForUser Am messageInAm = showCityInArmenian messageInAm
 
-textToCity :: Language -> Text -> City
+textToCity :: Language -> Text -> Maybe City
 textToCity En cityInEn = cityInEnglish  cityInEn
 textToCity Ru cityInRu = cityInRussian  cityInRu
-textToCity Am cityInAm = ityInArmenian cityInAm
+textToCity Am cityInAm = cityInArmenian cityInAm
 
 -- функция округления
 
@@ -82,7 +82,7 @@ getUserData lang = do
         else do
           cityFromUser <- getCityFromUser lang
           if | isNothing cityFromUser -> return $ Left InvalidCity
-             | otherwise              -> let [realDate] = rights [date] in return $ Right (realDate, fromJust cityFromUser)
+             | otherwise              -> let [realDate] = rights [date] in return $ Right (realDate, fromJust (fromJust cityFromUser))
 
 -- Получаем дату от пользователя и здесь же проверяем
 
@@ -104,10 +104,10 @@ getDateFromUser lang = do
 
 -- Получаем город от пользователя и здесь же проверяем
 
-getCityFromUser :: Language -> IO (Maybe City)
+getCityFromUser :: Language -> IO (Maybe (Maybe City))
 getCityFromUser lang = do
     TIO.putStrLn $ messageForUser lang MessageChooseForecastCity
-  --  TIO.putStrLn $ supportedCities lang
+    TIO.putStrLn $ supportedCities lang
     cityFromUser <- TIO.getLine
     if cityFromUser `elem` supportedCities lang
        then return $ Just (textToCity lang cityFromUser)
