@@ -73,24 +73,21 @@ getLanguageFromUser = do
 
 -- Главная функция этого модуля,которая получает и дату, и город, и проверяет данные
 
-getUserData :: Language -> IO (Either UserError (UTCTime, City))
-getUserData lang = do
-    date <- getDateFromUser lang
+getUserData :: Text -> Text -> Language -> IO (Either UserError (UTCTime, City))
+getUserData city date lang = do
+    date <- getDateFromUser date currentTime lang
     if isLeft date
       then
         let errorMessage = fromLeft "" date in return $ Left $ InvalidDate errorMessage
         else do
-          cityFromUser <- getCityFromUser lang
+          cityFromUser <- getCityFromUser city lang
           if | isNothing cityFromUser -> return $ Left InvalidCity
-             | otherwise              -> let [realDate] = rights [date] in return $ Right (realDate, fromJust (fromJust cityFromUser))
+             | otherwise              -> let [realDate] = rights [date] in return $ Right (realDate, fromJust cityFromUser)
 
 -- Получаем дату от пользователя и здесь же проверяем
 
-getDateFromUser :: Language -> IO (Either Text UTCTime)
-getDateFromUser lang = do
-  TIO.putStrLn $ messageForUser lang MessageChooseForecastDate
-  currentTime <- getCurrentTime
-  date        <- Prelude.getLine
+getDateFromUser :: Text -> UTCTime -> Language -> (Either Text UTCTime)
+getDateFromUser date currentTime lang = do
   let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (date ++ " 12:00:00") :: Maybe UTCTime
   case dayFromUser of
     Nothing -> return $ Left $ messageForUser lang MessageErrorWrongDate
@@ -104,11 +101,8 @@ getDateFromUser lang = do
 
 -- Получаем город от пользователя и здесь же проверяем
 
-getCityFromUser :: Language -> IO (Maybe (Maybe City))
-getCityFromUser lang = do
-    TIO.putStrLn $ messageForUser lang MessageChooseForecastCity
-    TIO.putStrLn $ Data.Text.intercalate ", " $ supportedCities lang
-    cityFromUser <- TIO.getLine
-    if cityFromUser `elem` supportedCities lang
-       then return $ Just (textToCity lang cityFromUser)
+getCityFromUser :: Text -> Language -> (Maybe (Maybe City))
+getCityFromUser city lang = do
+    if city `elem` supportedCities lang
+       then return $ (textToCity lang city)
        else return Nothing

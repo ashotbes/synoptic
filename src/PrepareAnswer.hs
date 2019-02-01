@@ -57,14 +57,11 @@ findOurForecast allForecasts dateFromUser =
 prepareMainInfo :: InfoAboutForecast -> MainWeatherInfo
 prepareMainInfo = main
 
-cityToText :: City -> Text
-cityToText = Data.Text.pack . show
-
 -- Показываем информацию о погоде
 
 showInfo :: Language -> MainWeatherInfo -> City -> UTCTime -> Text
 showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) cityFromUser dateFromUser =
-   messageForUser lang MessageForecast <> ( cityToText $ cityFromUser ) <> messageForUser lang On
+   messageForUser lang MessageForecast <> citiesForUser lang cityFromUser <> messageForUser lang On
    <> ( Data.Text.take 10 $ utcTimeToText $ dateFromUser) <> ": "
    <> messageForUser lang MessageAboutTemperature
    <> (intToText $ kToC $ (round $ temp1 )) <> "°"
