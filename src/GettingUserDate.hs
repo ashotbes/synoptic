@@ -3,11 +3,11 @@
 
 module GettingUserDate where
 
-import           Data.Either      (fromLeft, isLeft, rights)
-import           Data.Maybe       (fromJust, isNothing)
+--import           Data.Either      (fromLeft, isLeft, rights)
+--import           Data.Maybe       (fromJust, isNothing)
 import           Data.Text
 import           Data.Text.IO     as TIO
-import           Data.Time        (getCurrentTime)
+--import           Data.Time        (getCurrentTime)
 import           Data.Time.Clock  (NominalDiffTime, UTCTime, diffUTCTime)
 import           Data.Time.Format (defaultTimeLocale, parseTimeM)
 
@@ -71,33 +71,20 @@ getLanguageFromUser = do
            then return Am
            else error "The language you specified is not supported"
 
--- Главная функция этого модуля,которая получает и дату, и город, и проверяет данные
-
-getUserData :: Text -> Text -> Language -> IO (Either UserError (UTCTime, City))
-getUserData city date lang = do
-    date <- getDateFromUser date currentTime lang
-    if isLeft date
-      then
-        let errorMessage = fromLeft "" date in return $ Left $ InvalidDate errorMessage
-        else do
-          cityFromUser <- getCityFromUser city lang
-          if | isNothing cityFromUser -> return $ Left InvalidCity
-             | otherwise              -> let [realDate] = rights [date] in return $ Right (realDate, fromJust cityFromUser)
-
 -- Получаем дату от пользователя и здесь же проверяем
 
 getDateFromUser :: Text -> UTCTime -> Language -> (Either Text UTCTime)
 getDateFromUser date currentTime lang = do
-  let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (date ++ " 12:00:00") :: Maybe UTCTime
+  let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (show $ date <> " 12:00:00") :: Maybe UTCTime
   case dayFromUser of
-    Nothing -> return $ Left $ messageForUser lang MessageErrorWrongDate
+    Nothing -> Left $ messageForUser lang MessageErrorWrongDate
     Just validDay -> do
          let differenceInNominalDiffTime = diffUTCTime validDay currentTime
              secondsInDay = 86400
              differenceInDays = round' $ differenceInNominalDiffTime / secondsInDay
          if differenceInDays >= 0 && differenceInDays <= 5
-             then return $ Right validDay
-             else return $ Left $ messageForUser lang MessageErrorWrongDate
+             then Right validDay
+             else Left $ messageForUser lang MessageErrorWrongDate
 
 -- Получаем город от пользователя и здесь же проверяем
 
