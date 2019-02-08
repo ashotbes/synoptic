@@ -59,8 +59,6 @@ supportedCities lang = Prelude.map (citiesForUser lang) [Aragatsotn .. Yerevan]
 
 checkLanguage :: Text -> Either Text Language
 checkLanguage lang = do
-   --Prelude.putStrLn "Please,select language!  Ru | En | Am"
-   --lang <- TIO.getLine
    if lang == "Ru" || lang == "ru"
      then Right Ru
      else
@@ -69,7 +67,7 @@ checkLanguage lang = do
        else
          if lang == "Am" || lang == "am"
            then Right Am
-           else Left $ "The language you specified is not supported"
+           else Left $ "The language you specified is not supported!"
 
 -- Получаем дату от пользователя и здесь же проверяем
 

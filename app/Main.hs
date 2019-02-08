@@ -22,21 +22,21 @@ main = do
     let lang = checkLanguage language
     case lang of
       Left problemWithLang -> TIO.putStrLn problemWithLang
-      Right language1 -> do
-          TIO.putStrLn $ messageForUser language1 MessageChooseForecastDate
+      Right triedLanguage -> do
+          TIO.putStrLn $ messageForUser triedLanguage MessageChooseForecastDate
           dateFromUser <- TIO.getLine
           currentTime <- getCurrentTime
-          let date = getDateFromUser dateFromUser currentTime language1
+          let date = getDateFromUser dateFromUser currentTime triedLanguage
           case date of
             Left problemWithDate -> TIO.putStrLn problemWithDate
             Right correctDate -> do
-              TIO.putStrLn $ messageForUser language1 MessageChooseForecastCity
-              TIO.putStrLn $ Data.Text.intercalate ", " $ supportedCities language1
+              TIO.putStrLn $ messageForUser triedLanguage MessageChooseForecastCity
+              TIO.putStrLn $ Data.Text.intercalate ", " $ supportedCities triedLanguage
               cityFromUser <- TIO.getLine
-              let city = getCityFromUser cityFromUser language1
+              let city = getCityFromUser cityFromUser triedLanguage
               case city of
-                  Nothing -> reportAboutProblem language1 InvalidCity
+                  Nothing -> reportAboutProblem triedLanguage InvalidCity
                   Just correctCity -> do
                       response <- askWeather (correctDate, correctCity)
-                      let answer = prepareAnswer language1 response correctDate correctCity
+                      let answer = prepareAnswer triedLanguage response correctDate correctCity
                       TIO.putStrLn answer
