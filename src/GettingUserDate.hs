@@ -73,7 +73,7 @@ getLanguageFromUser = do
 
 -- Получаем дату от пользователя и здесь же проверяем
 
-getDateFromUser :: Text -> UTCTime -> Language -> (Either Text UTCTime)
+getDateFromUser :: Text -> UTCTime -> Language -> Either Text UTCTime
 getDateFromUser date currentTime lang = do
   let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (show $ date <> " 12:00:00") :: Maybe UTCTime
   case dayFromUser of
@@ -88,8 +88,8 @@ getDateFromUser date currentTime lang = do
 
 -- Получаем город от пользователя и здесь же проверяем
 
-getCityFromUser :: Text -> Language -> (Maybe (Maybe City))
+getCityFromUser :: Text -> Language -> Maybe City
 getCityFromUser city lang = do
     if city `elem` supportedCities lang
-       then return $ (textToCity lang city)
-       else return Nothing
+       then textToCity lang city
+       else Nothing
