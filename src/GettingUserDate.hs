@@ -57,25 +57,26 @@ round' mark
 supportedCities :: Language -> [Text]
 supportedCities lang = Prelude.map (citiesForUser lang) [Aragatsotn .. Yerevan]
 
-getLanguageFromUser :: IO Language
-getLanguageFromUser = do
-   Prelude.putStrLn "Please,select language!  Ru | En | Am"
-   lang <- TIO.getLine
+checkLanguage :: Text -> Either Text Language
+checkLanguage lang = do
+   --Prelude.putStrLn "Please,select language!  Ru | En | Am"
+   --lang <- TIO.getLine
    if lang == "Ru" || lang == "ru"
-     then return Ru
+     then Right Ru
      else
        if lang == "En" || lang == "en"
-       then return En
+       then Right En
        else
          if lang == "Am" || lang == "am"
-           then return Am
-           else error "The language you specified is not supported"
+           then Right Am
+           else Left $ "The language you specified is not supported"
 
 -- Получаем дату от пользователя и здесь же проверяем
 
 getDateFromUser :: Text -> UTCTime -> Language -> Either Text UTCTime
 getDateFromUser date currentTime lang = do
-  let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (show $ date <> " 12:00:00") :: Maybe UTCTime
+  let textToString = show $ date
+      dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (textToString ++ "12:00:00") :: Maybe UTCTime
   case dayFromUser of
     Nothing -> Left $ messageForUser lang MessageErrorWrongDate
     Just validDay -> do
