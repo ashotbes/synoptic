@@ -57,33 +57,20 @@ round' mark
 supportedCities :: Language -> [Text]
 supportedCities lang = Prelude.map (citiesForUser lang) [Aragatsotn .. Yerevan]
 
-checkLanguage :: Text -> Either Text Language
-checkLanguage lang = do
-   if lang == "Ru" || lang == "ru"
-     then Right Ru
-     else
-       if lang == "En" || lang == "en"
-       then Right En
-       else
-         if lang == "Am" || lang == "am"
-           then Right Am
-           else Left $ "The language you specified is not supported!"
-
 -- Получаем дату от пользователя и здесь же проверяем
 
-getDateFromUser :: Text -> UTCTime -> Language -> Either Text UTCTime
-getDateFromUser date currentTime lang = do
-  let textToString = show $ date
-      dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (textToString ++ "12:00:00") :: Maybe UTCTime
-  case dayFromUser of
-    Nothing -> Left $ messageForUser lang MessageErrorWrongDate
-    Just validDay -> do
-         let differenceInNominalDiffTime = diffUTCTime validDay currentTime
-             secondsInDay = 86400
-             differenceInDays = round' $ differenceInNominalDiffTime / secondsInDay
-         if differenceInDays >= 0 && differenceInDays <= 5
-             then Right validDay
-             else Left $ messageForUser lang MessageErrorWrongDate
+getDateFromUser :: UTCTime -> String -> Language -> Either Text UTCTime
+getDateFromUser currentTime dateFromUser triedLanguage = do
+    let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (dateFromUser ++ " 12:00:00") :: Maybe UTCTime
+    case dayFromUser of
+      Nothing -> Left $ messageForUser triedLanguage MessageErrorWrongDate
+      Just validDay -> do
+           let differenceInNominalDiffTime = diffUTCTime validDay currentTime
+               secondsInDay = 86400
+               differenceInDays = round' $ differenceInNominalDiffTime / secondsInDay
+           if differenceInDays >= 0 && differenceInDays <= 5
+             then Right $ validDay
+             else Left $ messageForUser triedLanguage MessageErrorWrongDate
 
 -- Получаем город от пользователя и здесь же проверяем
 

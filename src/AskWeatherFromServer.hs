@@ -1,4 +1,4 @@
-module AskWeather where
+module AskWeatherFromServer where
 
 import           Data.ByteString.Lazy (ByteString)
 import           Data.Time.Clock      (UTCTime)

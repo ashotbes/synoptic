@@ -3,17 +3,18 @@
 
 module Main where
 
-import           AskWeather      (askWeather)
+import           AskWeatherFromServer (askWeather)
 import           Data.Text
-import           Data.Text.IO    as TIO
+import           Data.Text.IO         as TIO
 import           Data.Time.Clock
-import           GettingUserDate (UserError (..), getCityFromUser,
-                                  getDateFromUser, checkLanguage,
-                                  messageForUser, reportAboutProblem,
-                                  supportedCities)
+import           GettingUserDate      (UserError (..), getCityFromUser,
+                                      getDateFromUser, messageForUser,
+                                      reportAboutProblem,supportedCities
+                                      )
 
-import           PrepareAnswer   (prepareAnswer)
-import           Types.Lang
+import           I18n.CheckLanguage   (checkLanguage)
+import           PrepareAnswer        (prepareAnswer)
+import           Types.Lang           (MessageForUser (..))
 
 main :: IO ()
 main = do
@@ -24,9 +25,9 @@ main = do
       Left problemWithLang -> TIO.putStrLn problemWithLang
       Right triedLanguage -> do
           TIO.putStrLn $ messageForUser triedLanguage MessageChooseForecastDate
-          dateFromUser <- TIO.getLine
           currentTime <- getCurrentTime
-          let date = getDateFromUser dateFromUser currentTime triedLanguage
+          dateFromUser <- Prelude.getLine
+          let date = getDateFromUser currentTime dateFromUser triedLanguage
           case date of
             Left problemWithDate -> TIO.putStrLn problemWithDate
             Right correctDate -> do
