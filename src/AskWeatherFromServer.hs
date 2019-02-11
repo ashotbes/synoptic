@@ -5,7 +5,7 @@ import           Data.Time.Clock      (UTCTime)
 import           Network.HTTP.Client  (Response, defaultManagerSettings,
                                        httpLbs, newManager, parseRequest)
 
-import           Types.City
+import           AllWithCities
 
 -- Отправляем запрос на сервер и получаем ответ
 

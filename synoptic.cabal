@@ -34,10 +34,11 @@ library
       I18n.Ru
       I18n.CheckLanguage
       PrepareAnswer
-      Types.City
+      AllWithCities
       Types.FullWeatherInfo
       Types.Lang
       Types.Weather
+      ShowAnswer
   other-modules:
       Paths_synoptic
   hs-source-dirs:

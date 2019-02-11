@@ -9,12 +9,12 @@ import           Data.Text.IO         as TIO
 import           Data.Time.Clock
 import           GettingUserDate      (UserError (..), getCityFromUser,
                                       getDateFromUser, messageForUser,
-                                      reportAboutProblem,supportedCities
-                                      )
+                                      reportAboutProblem)
 
 import           I18n.CheckLanguage   (checkLanguage)
 import           PrepareAnswer        (prepareAnswer)
 import           Types.Lang           (MessageForUser (..))
+import           AllWithCities        (supportedCities)
 
 main :: IO ()
 main = do
