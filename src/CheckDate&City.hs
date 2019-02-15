@@ -11,8 +11,9 @@ import           Data.Time.Format (defaultTimeLocale, parseTimeM)
 import           I18n.Am
 import           I18n.En
 import           I18n.Ru
+import           Types.City
 import           Types.Lang
-import           AllWithCities
+import           ConversionWithCities
 
 data UserError = InvalidDate Text | InvalidCity
     deriving (Show)

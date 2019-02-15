@@ -14,7 +14,7 @@ import           GettingUserDate      (UserError (..), getCityFromUser,
 import           I18n.CheckLanguage   (checkLanguage)
 import           PrepareAnswer        (prepareAnswer)
 import           Types.Lang           (MessageForUser (..))
-import           AllWithCities        (supportedCities)
+import           ConversionWithCities (supportedCities)
 
 main :: IO ()
 main = do

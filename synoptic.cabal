@@ -34,9 +34,10 @@ library
       I18n.Ru
       I18n.CheckLanguage
       PrepareAnswer
-      AllWithCities
+      ConversionWithCities
       Types.FullWeatherInfo
       Types.Lang
+      Types.City
       Types.Weather
       ShowAnswer
   other-modules:

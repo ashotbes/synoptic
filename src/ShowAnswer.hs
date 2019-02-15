@@ -4,9 +4,10 @@
 module ShowAnswer where
 
 import           Types.Lang
+import           Types.City
 import           Data.Text
 import           Data.Time.Clock
-import           AllWithCities
+import           ConversionWithCities
 import           Types.FullWeatherInfo
 import           GettingUserDate
 

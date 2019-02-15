@@ -14,9 +14,9 @@ import           Network.HTTP.Client   (Response, responseBody)
 import           ShowAnswer            (showInfo)
 import           Types.FullWeatherInfo
 import           Types.Lang
-import           AllWithCities
+import           Types.City
 
--- Функция,которая выдает строку с информацией о погоде
+-- Функция,которая выдает информацию о погоде
 
 prepareAnswer :: Language -> Response BSL.ByteString -> UTCTime -> City -> Text
 prepareAnswer lang response dateFromUser cityFromUser = finalPhrase
@@ -49,7 +49,7 @@ findOurForecast allForecasts dateFromUser =
                                         dt forecast == utcTimeToPOSIXSeconds dateFromUser)
                                    allForecasts
   in case ourForecast of
-         Nothing  -> error "Беда"
+         Nothing  -> error $  "Извините,что-то пошло не так!"
          Just our -> our
 
 -- Извлекаем нужные нам данные из прогноза
