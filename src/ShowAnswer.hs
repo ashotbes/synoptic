@@ -9,7 +9,7 @@ import           Data.Text
 import           Data.Time.Clock
 import           ConversionWithCities
 import           Types.FullWeatherInfo
-import           GettingUserDate
+import           CheckDateAndCity
 
 showInfo :: Language -> MainWeatherInfo -> City -> UTCTime -> Text
 showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) cityFromUser dateFromUser =

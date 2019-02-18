@@ -7,7 +7,7 @@ import           AskWeatherFromServer (askWeather)
 import           Data.Text
 import           Data.Text.IO         as TIO
 import           Data.Time.Clock
-import           GettingUserDate      (UserError (..), getCityFromUser,
+import           CheckDateAndCity     (UserError (..), getCityFromUser,
                                       getDateFromUser, messageForUser,
                                       reportAboutProblem)
 

@@ -28,7 +28,7 @@ source-repository head
 library
   exposed-modules:
       AskWeatherFromServer
-      GettingUserDate
+      CheckDateAndCity
       I18n.Am
       I18n.En
       I18n.Ru

@@ -22,7 +22,7 @@ prepareAnswer :: Language -> Response BSL.ByteString -> UTCTime -> City -> Text
 prepareAnswer lang response dateFromUser cityFromUser = finalPhrase
     where
       finalPhrase    = showInfo lang forecastToMain cityFromUser dateFromUser
-      forecastToMain = prepareMainInfo oneForecast
+      forecastToMain = prepareMainInfo (fromJust $ oneForecast)
       oneForecast    = findOurForecast listOfForecast dateFromUser
       listOfForecast = extractListOfForecasts (fromJust weatherValues)
       weatherValues  = parseRawJSON . responseBody $ response
@@ -43,14 +43,14 @@ extractListOfForecasts = list
 
 -- Получаем нужный нам прогноз
 
-findOurForecast :: [InfoAboutForecast] -> UTCTime -> InfoAboutForecast
+findOurForecast :: [InfoAboutForecast] -> UTCTime -> Maybe InfoAboutForecast
 findOurForecast allForecasts dateFromUser =
   let ourForecast = Data.List.find (\forecast ->
                                         dt forecast == utcTimeToPOSIXSeconds dateFromUser)
                                    allForecasts
   in case ourForecast of
-         Nothing  -> error $  "Извините,что-то пошло не так!"
-         Just our -> our
+         Nothing  -> Nothing
+         Just our -> Just our
 
 -- Извлекаем нужные нам данные из прогноза
 
