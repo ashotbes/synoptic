@@ -6,7 +6,7 @@ import           Network.HTTP.Client  (Response, defaultManagerSettings,
                                        httpLbs, newManager, parseRequest)
 
 import           Types.City
-
+ 
 -- Отправляем запрос на сервер и получаем ответ
 
 askWeather :: (UTCTime,City) -> IO (Response ByteString)

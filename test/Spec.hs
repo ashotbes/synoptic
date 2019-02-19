@@ -1,2 +1,11 @@
+import Test.Hspec
+import Test.QuickCheck
+
+import            Types.Lang
+import            CheckDateAndCity
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = hspec $ do
+  describe "Prelude.head" $ do
+    it "returns the text" $ do
+      reportAboutProblem Ru InvalidCity  `shouldBe` putStrLn "Please, enter a date for the forecast!"
