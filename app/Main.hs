@@ -13,12 +13,12 @@ import           CheckDateAndCity     (UserError (..), getCityFromUser,
 
 import           I18n.CheckLanguage   (checkLanguage)
 import           PrepareAnswer        (prepareAnswer)
-import           Types.Lang           (MessageForUser (..))
+import           Types.Lang           (MessageForUser (..),Language(..))
 import           ConversionWithCities (supportedCities)
 
 main :: IO ()
 main = do
-    Prelude.putStrLn "Please,select language!  Ru | En | Am"
+    TIO.putStrLn $ messageForUser En MessageChooseLanguage
     language <- TIO.getLine
     let lang = checkLanguage language
     case lang of

@@ -9,6 +9,7 @@ import           Types.City
 import           Types.Lang
 
 showMessageInEnglish :: MessageForUser -> Text
+showMessageInEnglish MessageChooseLanguage     = "Please,select language!  Ru | En | Am"
 showMessageInEnglish MessageChooseForecastDate = "Please, enter a date for the forecast!"
 showMessageInEnglish MessageChooseForecastCity = "Please, specify a city for the forecast!"
 showMessageInEnglish MessageForecast           = "Forecast for "

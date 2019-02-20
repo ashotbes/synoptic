@@ -1,4 +1,4 @@
-{-# LANGUAGE MultiWayIf #-} 
+{-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module I18n.Am where
@@ -9,6 +9,7 @@ import           Types.City
 import           Types.Lang
 
 showMessageInArmenian :: MessageForUser -> Text
+showMessageInArmenian MessageChooseLanguage     = "Ընտրեք լեզուն!"
 showMessageInArmenian MessageChooseForecastDate = "Նշեք կանխատեսման ամսաթիվը"
 showMessageInArmenian MessageChooseForecastCity = "Նշեք քաղաքը կանխատեսման համար"
 showMessageInArmenian MessageForecast           = "Եղանակի մասին տեղեկություններ: "

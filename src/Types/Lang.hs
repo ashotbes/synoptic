@@ -1,7 +1,8 @@
 module Types.Lang where
 
 data MessageForUser
-   = MessageChooseForecastDate
+   = MessageChooseLanguage
+   | MessageChooseForecastDate
    | MessageChooseForecastCity
    | MessageForecast
    | On
