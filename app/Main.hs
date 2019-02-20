@@ -3,18 +3,21 @@
 
 module Main where
 
-import           AskWeatherFromServer (askWeather)
+import           AskWeatherFromServer  ( askWeather )
+import           CheckDateAndCity      ( UserError (..), getCityFromUser,
+                                         getDateFromUser, messageForUser,
+                                         reportAboutProblem )
+--import           Data.Aeson
+--import qualified Data.ByteString.Char8 as BS
 import           Data.Text
-import           Data.Text.IO         as TIO
+import           Data.Text.IO          as TIO
 import           Data.Time.Clock
-import           CheckDateAndCity     (UserError (..), getCityFromUser,
-                                      getDateFromUser, messageForUser,
-                                      reportAboutProblem)
+--import qualified Data.Yaml             as Y
 
-import           I18n.CheckLanguage   (checkLanguage)
-import           PrepareAnswer        (prepareAnswer)
-import           Types.Lang           (MessageForUser (..),Language(..))
-import           ConversionWithCities (supportedCities)
+import           ConversionWithCities  ( supportedCities )
+import           I18n.CheckLanguage    ( checkLanguage )
+import           PrepareAnswer         ( prepareAnswer )
+import           Types.Lang            ( Language (..), MessageForUser (..) )
 
 main :: IO ()
 main = do

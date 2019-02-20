@@ -2,9 +2,9 @@
 
 module Types.Weather where
 
-import           Data.Aeson.Types (FromJSON, ToJSON)
-import           Data.Text        (Text)
-import           GHC.Generics     (Generic)
+import           Data.Aeson.Types ( FromJSON, ToJSON )
+import           Data.Text        ( Text )
+import           GHC.Generics     ( Generic )
 
 instance ToJSON   Weather
 

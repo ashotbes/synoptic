@@ -2,19 +2,19 @@
 
 module PrepareAnswer where
 
-import           Data.Aeson            (decode)
+import           Data.Aeson            ( decode )
 import qualified Data.ByteString.Lazy  as BSL
-import           Data.List             (find)
-import           Data.Maybe            (fromJust)
+import           Data.List             ( find )
+import           Data.Maybe            ( fromJust )
 import           Data.Text
-import           Data.Time.Clock       (UTCTime)
-import           Data.Time.Clock.POSIX (utcTimeToPOSIXSeconds)
-import           Network.HTTP.Client   (Response, responseBody)
+import           Data.Time.Clock       ( UTCTime )
+import           Data.Time.Clock.POSIX ( utcTimeToPOSIXSeconds )
+import           Network.HTTP.Client   ( Response, responseBody )
 
-import           ShowAnswer            (showInfo)
+import           ShowAnswer            ( showInfo )
+import           Types.City
 import           Types.FullWeatherInfo
 import           Types.Lang
-import           Types.City
 
 -- Функция,которая выдает информацию о погоде
 

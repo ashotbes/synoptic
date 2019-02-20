@@ -1,4 +1,4 @@
-import Test.Hspec
+yimport Test.Hspec
 import Test.QuickCheck
 
 import            Types.Lang

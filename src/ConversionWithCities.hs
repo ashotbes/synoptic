@@ -1,5 +1,5 @@
+{-# LANGUAGE MultiWayIf        #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE MultiWayIf #-}
 
 module ConversionWithCities where
 
@@ -8,8 +8,8 @@ import           Data.Text
 import           I18n.Am
 import           I18n.En
 import           I18n.Ru
-import           Types.Lang
 import           Types.City
+import           Types.Lang
 
 -- Список городов
 

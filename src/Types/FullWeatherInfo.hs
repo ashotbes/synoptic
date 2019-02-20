@@ -2,12 +2,12 @@
 
 module Types.FullWeatherInfo where
 
-import           Data.Aeson.Types      (FromJSON, ToJSON)
-import           Data.Text             (Text)
-import           Data.Time.Clock.POSIX (POSIXTime)
-import           GHC.Generics          (Generic)
+import           Data.Aeson.Types      ( FromJSON, ToJSON )
+import           Data.Text             ( Text )
+import           Data.Time.Clock.POSIX ( POSIXTime )
+import           GHC.Generics          ( Generic )
 
-import           Types.Weather         (Weather)
+import           Types.Weather         ( Weather )
 
 -- JSON типы
 

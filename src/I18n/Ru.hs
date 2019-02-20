@@ -1,12 +1,11 @@
-{-# LANGUAGE MultiWayIf #-}
+{-# LANGUAGE MultiWayIf        #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module I18n.Ru where
 
 import           Data.Text
-
-import           Types.Lang
 import           Types.City
+import           Types.Lang
 
 showMessageInRussian :: MessageForUser -> Text
 showMessageInRussian MessageChooseLanguage     = "Пожалуйста,выберите язык!"
@@ -25,15 +24,16 @@ showMessageInRussian MessageUnexpectedError    = "Что-то пошло не т
 cityInRussian :: Text -> Maybe City
 cityInRussian city =
   if | city == "Арагацотн"  -> Just Aragatsotn
-     | city == "Арарат"     -> Just  Ararat
-     | city == "Армавир"    -> Just  Armavir
-     | city == "Дилижан"    -> Just  Dilijan
-     | city == "Гехаркуник" -> Just  Gegharkunik
-     | city == "Гюмри"      -> Just  Gyumri
-     | city == "Котайк"     -> Just  Kotayk
-     | city == "Ширак"      -> Just  Shirak
-     | city == "Ванадзор"   -> Just  Vanadzor
-     | city == "Ереван"     -> Just  Yerevan
+     | city == "Арарат"     -> Just Ararat
+     | city == "Армавир"    -> Just Armavir
+     | city == "Дилижан"    -> Just Dilijan
+     | city == "Гехаркуник" -> Just Gegharkunik
+     | city == "Гюмри"      -> Just Gyumri
+     | city == "Котайк"     -> Just Kotayk
+     | city == "Ширак"      -> Just Shirak
+     | city == "Сюник"      -> Just Syunik
+     | city == "Ванадзор"   -> Just Vanadzor
+     | city == "Ереван"     -> Just Yerevan
      | otherwise            -> Nothing
 
 showCityInRussian :: City -> Text

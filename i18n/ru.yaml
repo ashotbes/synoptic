@@ -1,0 +1,25 @@
+MessageChooseLanguage     : "Пожалуйста,выберите язык!"
+MessageChooseForecastDate : "Пожалуйста, укажите дату прогноза!"
+MessageChooseForecastCity : "Пожалуйста, укажите город!"
+MessageForecast           : "Информация о погоде в "
+On                        : " на "
+MessageAboutTemperature   : " Температура: "
+MessageAboutPressure      : " Давление: "
+PressureDesignation       : " мм рт.ст "
+Humidity                  : "Относительная влажность: "
+MessageErrorWrongDate     : "Вы ввели неверную дату,пожалуйста исправьте её!"
+MessageErrorWrongCity     : "Вы ввели неверный город,пожалуйста,укажите город из списка!"
+MessageUnexpectedError    : "Что-то пошло не так)"
+
+cities:
+   - ("Арагацотн",Aragatsotn)
+   - ("Арарат",Ararat)
+   - ("Армавир",Armavir)
+   - ("Дилижан",Dilijan)
+   - ("Гехаркуник",Gegharkunik)
+   - ("Гюмри",Gyumri)
+   - ("Котайк",Kotayk)
+   - ("Ширак",Shirak)
+   - ("Сюник",Syunik)
+   - ("Ванадзор",Vanadzor)
+   - ("Ереван",Yerevan)

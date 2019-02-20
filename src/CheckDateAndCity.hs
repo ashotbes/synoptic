@@ -4,16 +4,16 @@
 module CheckDateAndCity where
 
 import           Data.Text
-import           Data.Text.IO     as TIO
-import           Data.Time.Clock  (NominalDiffTime, UTCTime, diffUTCTime)
-import           Data.Time.Format (defaultTimeLocale, parseTimeM)
+import           Data.Text.IO         as TIO
+import           Data.Time.Clock      ( NominalDiffTime, UTCTime, diffUTCTime )
+import           Data.Time.Format     ( defaultTimeLocale, parseTimeM )
 
+import           ConversionWithCities
 import           I18n.Am
 import           I18n.En
 import           I18n.Ru
 import           Types.City
 import           Types.Lang
-import           ConversionWithCities
 
 data UserError = InvalidDate Text | InvalidCity
     deriving (Show)

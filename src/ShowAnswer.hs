@@ -3,13 +3,13 @@
 
 module ShowAnswer where
 
-import           Types.Lang
-import           Types.City
+import           CheckDateAndCity
+import           ConversionWithCities
 import           Data.Text
 import           Data.Time.Clock
-import           ConversionWithCities
+import           Types.City
 import           Types.FullWeatherInfo
-import           CheckDateAndCity
+import           Types.Lang
 
 showInfo :: Language -> MainWeatherInfo -> City -> UTCTime -> Text
 showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) cityFromUser dateFromUser =

@@ -2,8 +2,8 @@
 
 module I18n.CheckLanguage where
 
-import            Data.Text
-import            Types.Lang
+import           Data.Text
+import           Types.Lang
 
 checkLanguage :: Text -> Either Text Language
 checkLanguage lang = do
