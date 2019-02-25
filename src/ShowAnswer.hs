@@ -11,26 +11,23 @@ import           Types.City
 import           Types.FullWeatherInfo
 import           Types.Lang
 
+convToText :: Show a => a -> Text
+convToText = Data.Text.pack . show
+
 showInfo :: Language -> MainWeatherInfo -> City -> UTCTime -> Text
 showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) cityFromUser dateFromUser =
    messageForUser lang MessageForecast <> citiesForUser lang cityFromUser <> messageForUser lang On
-   <> ( Data.Text.take 10 $ utcTimeToText $ dateFromUser) <> ": "
+   <> ( Data.Text.take 10 $ convToText $ dateFromUser) <> ": "
    <> messageForUser lang MessageAboutTemperature
-   <> (intToText $ kToC $ (round $ temp1 )) <> "°"
-   <> messageForUser lang MessageAboutPressure <> (intToText $ prConversion $ pressure1)
+   <> (convToText$ kToC $ (round $ temp1 )) <> "°"
+   <> messageForUser lang MessageAboutPressure <> (convToText$ prConversion $ pressure1)
    <> messageForUser lang PressureDesignation
-   <> messageForUser lang Humidity <> ( intToText $ humidity1 ) <> "%"
+   <> messageForUser lang Humidity <> ( convToText$ humidity1 ) <> "%"
 
 -- Конвертация
 
 kToC :: Int -> Int
 kToC kel = kel - 273
-
-intToText :: Int -> Text
-intToText = Data.Text.pack . show
-
-utcTimeToText :: UTCTime -> Text
-utcTimeToText = Data.Text.pack . show
 
 prConversion :: Double -> Int
 prConversion pres = round $ (pres / 1.333)
