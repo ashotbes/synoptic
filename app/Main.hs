@@ -13,6 +13,7 @@ import           Data.Text
 import           Data.Text.IO          as TIO
 import           Data.Time.Clock
 --import qualified Data.Yaml             as Y
+import           System.Directory
 
 import           ConversionWithCities  ( supportedCities )
 import           I18n.CheckLanguage    ( checkLanguage )
@@ -21,6 +22,8 @@ import           Types.Lang            ( Language (..), MessageForUser (..) )
 
 main :: IO ()
 main = do
+    fileNames <- listDirectory "/home/ashot/synoptic/i18n"
+    print fileNames
     TIO.putStrLn $ messageForUser En MessageChooseLanguage
     language <- TIO.getLine
     let lang = checkLanguage language
