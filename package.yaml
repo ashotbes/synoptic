@@ -43,6 +43,7 @@ executables:
     dependencies:
       - synoptic
       - text
+      - filepath
     ghc-options: -Wall -Werror
 
 tests:
