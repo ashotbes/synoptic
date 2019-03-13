@@ -1,17 +1,17 @@
 module DecodeYaml where
 
-import qualified Data.ByteString as B
-import qualified Data.Yaml      as Y
-import qualified Data.Text.IO   as TIO
-import           Types.UserPhrases
+import qualified Data.ByteString   as B
 import           Data.Text
+import qualified Data.Text.IO      as TIO
+import qualified Data.Yaml         as Y
+import           Types.UserPhrases
 
 parseYaml :: B.ByteString -> Maybe UserPhrase
 parseYaml rawYAML = do
-    let result = Y.decodeEither' rawYAML :: Either Text UserPhrase
+    let result = Y.decodeEither' rawYAML :: Either Y.ParseException UserPhrase
     case result of
-          Right ok -> Just ok
-          Left err -> error "asdasd"
+        Right ok -> Just ok
+        Left err -> error "asdasd"
 
 choosLang :: Either Y.ParseException UserPhrase -> Text
 choosLang (Right (UserPhrase lang _ _ _ _ _ _ _ _ _ _ _)) = lang
@@ -31,7 +31,7 @@ forecastInfo (Left exp4 ) = error "asd1213asdasd"
 
 on' :: Either Y.ParseException UserPhrase -> Text
 on' (Right (UserPhrase _ _ _ _ on _ _ _ _ _ _ _)) = on
-on' (Left exp5 ) = error "asd1213asdasd"
+on' (Left exp5 )                                  = error "asd1213asdasd"
 
 tempInfo :: Either Y.ParseException UserPhrase -> Text
 tempInfo (Right (UserPhrase _ _ _ _ _ temp _ _ _ _ _ _)) = temp
@@ -59,4 +59,4 @@ messErrorCity (Left exp11 ) = error "asd1213asdasd"
 
 messUnexpectedError :: Either Y.ParseException UserPhrase -> Text
 messUnexpectedError (Right (UserPhrase _ _ _ _ _ _ _ _ _ _ _ unexpectedError)) = unexpectedError
-messUnexpectedError (Left exp12 ) = exp12
+messUnexpectedError (Left exp12 ) = error ""
