@@ -10,7 +10,7 @@ import           I18n.En
 import           I18n.Ru
 import           Types.City
 import           Types.Lang
-
+ 
 -- Список городов
 
 supportedCities :: Language -> [Text]

@@ -6,10 +6,10 @@ import           Data.Aeson
 import           Data.Text
 import           GHC.Generics
 
-instance ToJSON   MessageForUser
-instance FromJSON MessageForUser
+instance ToJSON   UserPhrase
+instance FromJSON UserPhrase
 
-data MessageForUser = MessageForUser
+data UserPhrase = UserPhrase
   { messageChooseLanguage     :: Text ,
     messageChooseForecastDate :: Text ,
     messageChooseForecastCity :: Text ,
@@ -21,7 +21,6 @@ data MessageForUser = MessageForUser
     humidity                  :: Text ,
     messageErrorWrongDate     :: Text ,
     messageErrorWrongCity     :: Text ,
-    messageUnexpectedError    :: Text ,
-    cities                    :: [(Text,Text)]
+    messageUnexpectedError    :: Text 
    }
    deriving (Show,Generic)
