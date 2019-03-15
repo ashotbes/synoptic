@@ -9,9 +9,6 @@ import           Data.Time.Clock      ( NominalDiffTime, UTCTime, diffUTCTime )
 import           Data.Time.Format     ( defaultTimeLocale, parseTimeM )
 
 import           ConversionWithCities
-import           I18n.Am
-import           I18n.En
-import           I18n.Ru
 import           Types.City
 import           Types.Lang
 
@@ -20,16 +17,9 @@ data UserError = InvalidDate Text | InvalidCity
 
 -- Сообщаем о проблемах,которые могут возникнуть
 
-reportAboutProblem :: Language -> UserError -> IO ()
-reportAboutProblem lang (InvalidDate _ ) = TIO.putStrLn $ messageForUser lang MessageErrorWrongDate
-reportAboutProblem lang InvalidCity      = TIO.putStrLn $ messageForUser lang MessageErrorWrongCity
-
--- Показываем сообщения на нужном пользователю языке
-
-messageForUser :: Language -> MessageForUser -> Text
-messageForUser En messageInEn = showMessageInEnglish  messageInEn
-messageForUser Ru messageInRu = showMessageInRussian  messageInRu
-messageForUser Am messageInAm = showMessageInArmenian messageInAm
+reportAboutProblem :: UserError -> IO ()
+reportAboutProblem  (InvalidDate _ ) = TIO.putStrLn "Eroroehuaisd"
+reportAboutProblem InvalidCity      = TIO.putStrLn "Eroroehuaisd"
 
 -- функция округления
 
@@ -42,18 +32,18 @@ round' mark
 
 -- Получаем дату от пользователя и здесь же проверяем
 
-getDateFromUser :: UTCTime -> String -> Language -> Either Text UTCTime
-getDateFromUser currentTime dateFromUser triedLanguage = do
+getDateFromUser :: UTCTime -> String -> Either Text UTCTime
+getDateFromUser currentTime dateFromUser = do
     let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (dateFromUser ++ " 12:00:00") :: Maybe UTCTime
     case dayFromUser of
-      Nothing -> Left $ messageForUser triedLanguage MessageErrorWrongDate
+      Nothing -> Left $ "messageForUser triedLanguage MessageErrorWrongDate"
       Just validDay -> do
            let differenceInNominalDiffTime = diffUTCTime validDay currentTime
                secondsInDay = 86400
                differenceInDays = round' $ differenceInNominalDiffTime / secondsInDay
            if differenceInDays >= 0 && differenceInDays <= 5
              then Right $ validDay
-             else Left $ messageForUser triedLanguage MessageErrorWrongDate
+             else Left $ "messageForUser triedLanguage MessageErrorWrongDate"
 
 -- Получаем город от пользователя и здесь же проверяем
 
