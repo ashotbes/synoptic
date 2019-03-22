@@ -17,7 +17,7 @@ import            Types.Lang
 convToText :: Show a => a -> Text
 convToText = Data.Text.pack . show
 
-showInfo :: Language -> MainWeatherInfo -> City -> UTCTime -> Text
+showInfo :: Language -> MainWeatherInfo -> City -> UTCTime -> Text 
 showInfo lang (MainWeatherInfo temp1 _ _ pressure1 _ _ humidity1 _ ) cityFromUser dateFromUser =
   ( Data.Text.take 10 $ convToText $ dateFromUser) <> ": " <> citiesForUser lang cityFromUser
   <> (convToText $ kToC $ (round $ temp1 )) <> "°"
