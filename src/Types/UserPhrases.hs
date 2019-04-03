@@ -21,6 +21,7 @@ data UserPhrase = UserPhrase
     humidity                  :: Text ,
     messageErrorWrongDate     :: Text ,
     messageErrorWrongCity     :: Text ,
-    messageUnexpectedError    :: Text 
+    messageUnexpectedError    :: Text ,
+    cities                    :: (Text,Text)
    }
    deriving (Show,Generic)

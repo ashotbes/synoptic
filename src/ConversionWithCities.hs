@@ -5,9 +5,12 @@ module ConversionWithCities where
 
 import           Data.Text
 
+import           I18n.Am
+import           I18n.En
+import           I18n.Ru
 import           Types.City
 import           Types.Lang
-
+ 
 -- Список городов
 
 supportedCities :: Language -> [Text]
@@ -24,89 +27,5 @@ citiesForUser :: Language -> City -> Text
 citiesForUser En messageInEn = showCityInEnglish  messageInEn
 citiesForUser Ru messageInRu = showCityInRussian  messageInRu
 citiesForUser Am messageInAm = showCityInArmenian messageInAm
-
-cityInArmenian :: Text -> Maybe City
-cityInArmenian city =
-   if | city == "Արագածոտն"   -> Just Aragatsotn
-      | city == "Արարատ"      -> Just Ararat
-      | city == "Արմավիր"     -> Just Armavir
-      | city == "Դիլիջան"     -> Just Dilijan
-      | city == "Գեղարքունիք" -> Just Gegharkunik
-      | city == "Գյումրի"     -> Just Gyumri
-      | city == "Կոտայք"      -> Just Kotayk
-      | city ==  "Սյունիք"    -> Just Syunik
-      | city == "Վանաձոր"     -> Just Vanadzor
-      | city == "Երեւան"      -> Just Yerevan
-      | otherwise             -> Nothing
-
-showCityInArmenian :: City -> Text
-showCityInArmenian Aragatsotn  = "Արագածոտն"
-showCityInArmenian Ararat      = "Արարատ"
-showCityInArmenian Armavir     = "Արմավիր"
-showCityInArmenian Dilijan     = "Դիլիջան"
-showCityInArmenian Gegharkunik = "Գեղարքունիք"
-showCityInArmenian Gyumri      = "Գյումրի"
-showCityInArmenian Kotayk      = "Կոտայք"
-showCityInArmenian Shirak      = "Շիրակ"
-showCityInArmenian Syunik      = "Սյունիք"
-showCityInArmenian Vanadzor    = "Վանաձոր"
-showCityInArmenian Yerevan     = "Երեւան"
-
-cityInEnglish :: Text -> Maybe City
-cityInEnglish city =
-  if | city == "Yerevan"    -> Just Yerevan
-     | city == "Ararat"     -> Just Ararat
-     | city == "Armavir"    -> Just Armavir
-     | city == "Dilijan"    -> Just Dilijan
-     | city == "Gegharkunik"-> Just Gegharkunik
-     | city == "Gyumri"     -> Just Gyumri
-     | city == "Kotayk"     -> Just Kotayk
-     | city == "Shirak"     -> Just Shirak
-     | city == "Syunik "    -> Just Syunik
-     | city == "Vanadzor"   -> Just Vanadzor
-     | city == "Aragatsotn" -> Just Aragatsotn
-     | otherwise            -> Nothing
-
-showCityInEnglish :: City -> Text
-showCityInEnglish Aragatsotn  = "Aragatsotn"
-showCityInEnglish Ararat      = "Ararat"
-showCityInEnglish Armavir     = "Armavir"
-showCityInEnglish Dilijan     = "Dilijan"
-showCityInEnglish Gegharkunik = "Gegharkunik"
-showCityInEnglish Gyumri      = "Gyumri"
-showCityInEnglish Kotayk      = "Kotayk"
-showCityInEnglish Shirak      = "Shirak"
-showCityInEnglish Syunik      = "Syunik "
-showCityInEnglish Vanadzor    = "Vanadzor"
-showCityInEnglish Yerevan     = "Yerevan"
-
-cityInRussian :: Text -> Maybe City
-cityInRussian city =
-  if | city == "Арагацотн"  -> Just Aragatsotn
-     | city == "Арарат"     -> Just Ararat
-     | city == "Армавир"    -> Just Armavir
-     | city == "Дилижан"    -> Just Dilijan
-     | city == "Гехаркуник" -> Just Gegharkunik
-     | city == "Гюмри"      -> Just Gyumri
-     | city == "Котайк"     -> Just Kotayk
-     | city == "Ширак"      -> Just Shirak
-     | city == "Сюник"      -> Just Syunik
-     | city == "Ванадзор"   -> Just Vanadzor
-     | city == "Ереван"     -> Just Yerevan
-     | otherwise            -> Nothing
-
-showCityInRussian :: City -> Text
-showCityInRussian Aragatsotn  = "Арагацотн"
-showCityInRussian Ararat      = "Арарат"
-showCityInRussian Armavir     = "Армавир"
-showCityInRussian Dilijan     = "Дилижан"
-showCityInRussian Gegharkunik = "Гехаркуник"
-showCityInRussian Gyumri      = "Гюмри"
-showCityInRussian Kotayk      = "Котайк"
-showCityInRussian Shirak      = "Ширак"
-showCityInRussian Syunik      = "Сюник"
-showCityInRussian Vanadzor    = "Ванадзор"
-showCityInRussian Yerevan     = "Ереван"
-
 
 -- Сначала превращаем текст в список городов,а потом показываем на нужном пользователю языке

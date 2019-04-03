@@ -2,6 +2,7 @@
 
 module PrepareAnswer where
 
+import           Types.UserPhrases
 import           Data.Aeson            ( decode )
 import qualified Data.ByteString.Lazy  as BSL
 import           Data.List             ( find )
@@ -18,10 +19,11 @@ import           Types.Lang
 
 -- Функция,которая выдает информацию о погоде
 
-prepareAnswer :: Language -> Response BSL.ByteString -> UTCTime -> City -> Text
-prepareAnswer lang response dateFromUser cityFromUser = finalPhrase
+prepareAnswer
+  :: Language -> Response BSL.ByteString -> UTCTime -> City -> UserPhrase -> Text
+prepareAnswer lang response dateFromUser cityFromUser phrase  = finalPhrase
     where
-      finalPhrase    = showInfo lang forecastToMain cityFromUser dateFromUser
+      finalPhrase    = showInfo lang forecastToMain cityFromUser dateFromUser phrase
       forecastToMain = prepareMainInfo (fromJust $ oneForecast)
       oneForecast    = findOurForecast listOfForecast dateFromUser
       listOfForecast = extractListOfForecasts (fromJust weatherValues)

@@ -1,66 +1,54 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module DecodeYaml where
 
---import qualified Data.ByteString as B
-import qualified Data.ByteString.Lazy as BSL
---import qualified Data.Yaml      as Y
---import qualified Data.Text.IO   as TIO
-import           Types.UserPhrases
+import           Control.Exception
+import           Data.ByteString (ByteString)
 import           Data.Text
-import           Data.Aeson as A
+--import qualified Data.Text.IO      as TIO
+import qualified Data.Yaml         as Y
+import           Types.UserPhrases
 
-parseYaml :: BSL.ByteString -> Maybe UserPhrase
+parseYaml :: ByteString -> Maybe UserPhrase
 parseYaml rawYAML = do
-    let result = A.decode rawYAML :: Maybe UserPhrase
+    let result = Y.decodeEither' rawYAML :: Either Y.ParseException UserPhrase
     case result of
-          Just ok -> Just ok
-          Nothing -> error "asdasd"
+        Right ok -> Just ok
+        Left prob -> throw $ prob
 
-choosLang :: Maybe UserPhrase -> Text
-choosLang (Just (UserPhrase lang _ _ _ _ _ _ _ _ _ _ _)) = lang
-choosLang Nothing =  "asd1213asdasd"
+choosLang :: UserPhrase -> Text
+choosLang (UserPhrase messChoosLang _ _ _ _ _ _ _ _ _ _ _ _) = messChoosLang
 
-choosDate :: Maybe UserPhrase -> Text
-choosDate (Just (UserPhrase _ date _ _ _ _ _ _ _ _ _ _)) = date
-choosDate Nothing =  "asd1213asdasd"
+choosDate :: UserPhrase -> Text
+choosDate (UserPhrase _ date _ _ _ _  _ _ _ _ _ _ _ ) = date
 
-choosCity :: Maybe UserPhrase -> Text
-choosCity (Just (UserPhrase _ _ city _ _ _ _ _ _ _ _ _)) = city
-choosCity Nothing =  "asd1213asdasd"
+choosCity :: UserPhrase -> Text
+choosCity (UserPhrase _ _ city _ _ _ _ _  _ _ _ _ _) = city
 
-forecastInfo :: Maybe UserPhrase -> Text
-forecastInfo (Just (UserPhrase _ _ _ forecast _ _ _ _ _ _ _ _)) = forecast
-forecastInfo Nothing = "asd1213asdasd"
+forecastInfo :: UserPhrase -> Text
+forecastInfo (UserPhrase _ _ _ forecast _ _  _ _ _ _ _ _ _) = forecast
 
-on' :: Maybe UserPhrase -> Text
-on' (Just (UserPhrase _ _ _ _ on1 _ _ _ _ _ _ _)) = on1
-on' Nothing =  "asd1213asdasd"
+on' :: UserPhrase -> Text
+on' (UserPhrase _ _ _ _ on1 _ _ _ _ _ _ _ _) = on1
 
-tempInfo :: Maybe UserPhrase -> Text
-tempInfo (Just (UserPhrase _ _ _ _ _ temp _ _ _ _ _ _)) = temp
-tempInfo Nothing =  "asd1213asdasd"
+tempInfo :: UserPhrase -> Text
+tempInfo (UserPhrase _ _ _ _ _ temp _ _ _ _ _ _ _) = temp
 
-pressInfo :: Maybe UserPhrase -> Text
-pressInfo (Just (UserPhrase _ _ _ _ _ _ pressure _ _ _ _ _)) = pressure
-pressInfo Nothing =  "asd1213asdasd"
+pressInfo :: UserPhrase -> Text
+pressInfo (UserPhrase _ _ _ _ _ _ pressure _ _ _ _ _ _) = pressure
 
-pressDes :: Maybe UserPhrase -> Text
-pressDes (Just (UserPhrase _ _ _ _ _ _ _ press _ _ _ _)) = press
-pressDes Nothing  =  "asd1213asdasd"
+pressDes :: UserPhrase -> Text
+pressDes (UserPhrase _ _ _ _ _ _ _ press _ _ _ _ _) = press
 
-infoAboutHumidity :: Maybe UserPhrase -> Text
-infoAboutHumidity (Just (UserPhrase _ _ _ _ _ _ _ _ humidity' _ _ _)) = humidity'
-infoAboutHumidity Nothing =  "asd1213asdasd"
+infoAboutHumidity :: UserPhrase -> Text
+infoAboutHumidity (UserPhrase _ _ _ _ _ _ _ _ _ humidity1 _ _ _) = humidity1
 
-messErrorDate :: Maybe UserPhrase -> Text
-messErrorDate (Just (UserPhrase _ _ _ _ _ _ _ _ _ errorDate _ _)) = errorDate
-messErrorDate Nothing =  "asd1213asdasd"
+messthrowDate :: UserPhrase -> Text
+messthrowDate (UserPhrase _ _ _ _ _ _ _ _ _ _ throwDate _ _) = throwDate
 
-messErrorCity :: Maybe UserPhrase -> Text
-messErrorCity (Just (UserPhrase _ _ _ _ _ _ _ _ _ _ errorCity _)) = errorCity
-messErrorCity Nothing = error "asd1213asdasd"
+messthrowCity :: UserPhrase -> Text
+messthrowCity( UserPhrase _ _ _ _ _ _ _ _ _  _ _ throwCity _) = throwCity
 
-messUnexpectedError :: Maybe UserPhrase -> Text
-messUnexpectedError (Just (UserPhrase _ _ _ _ _ _ _ _ _ _ _ unexpectedError)) = unexpectedError
-messUnexpectedError Nothing  =  "asd1213asdasd"
+messUnexpectedthrow :: UserPhrase -> Text
+messUnexpectedthrow (UserPhrase _ _ _ _ _ _ _ _ _ _ _ unexpectedthrow _ ) = unexpectedthrow
+
+takeCityName :: UserPhrase -> Text
+takeCityName (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ (cityOnEng,_ )) = cityOnEng

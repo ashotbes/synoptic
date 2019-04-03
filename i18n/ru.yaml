@@ -1,7 +1,7 @@
-messageChooseLanguage     : "Пожалуйста,выберите язык!"
+messageChooseLanguage     : "Пожалуйста,один из предлагаемых языков!"
 messageChooseForecastDate : "Пожалуйста, укажите дату прогноза!"
 messageChooseForecastCity : "Пожалуйста, укажите город!"
-messageForecast           : "фывфыв "
+messageForecast           : "Информация о погоде в "
 on                        : " на "
 messageAboutTemperature   : " Температура: "
 messageAboutPressure      : " Давление: "
@@ -9,17 +9,17 @@ pressureDesignation       : " мм рт.ст "
 humidity                  : "Относительная влажность: "
 messageErrorWrongDate     : "Вы ввели неверную дату,пожалуйста исправьте её!"
 messageErrorWrongCity     : "Вы ввели неверный город,пожалуйста,укажите город из списка!"
-messageUnexpectedError    : "Что-то пошло не так)"
+messageUnexpectedError    : "Что-то пошло не так)"        
 
-# cities:
-#   - ("Арагацотн",Aragatsotn)
-#   - ("Арарат",Ararat)
-#   - ("Армавир",Armavir)
-#   - ("Дилижан",Dilijan)
-#   - ("Гехаркуник",Gegharkunik)
-#   - ("Гюмри",Gyumri)
-#   - ("Котайк",Kotayk)
-#   - ("Ширак",Shirak)
-#   - ("Сюник",Syunik)
-#   - ("Ванадзор",Vanadzor)
-#   - ("Ереван",Yerevan)
+cities:
+   - ("Арагацотн","Aragatsotn")
+   - ("Арарат","Ararat")
+   - ("Армавир","Armavir")
+   - ("Дилижан","Dilijan")
+   - ("Гехаркуник","Gegharkunik")
+   - ("Гюмри","Gyumri")
+   - ("Котайк","Kotayk")
+   - ("Ширак","Shirak")
+   - ("Сюник","Syunik")
+   - ("Ванадзор","Vanadzor")
+   - ("Ереван","Yerevan")
