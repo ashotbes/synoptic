@@ -50,5 +50,5 @@ messthrowCity( UserPhrase _ _ _ _ _ _ _ _ _  _ _ throwCity _) = throwCity
 messUnexpectedthrow :: UserPhrase -> Text
 messUnexpectedthrow (UserPhrase _ _ _ _ _ _ _ _ _ _ _ unexpectedthrow _ ) = unexpectedthrow
 
-takeCityName :: UserPhrase -> Text
-takeCityName (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ (cityOnEng,_ )) = cityOnEng
+takeCityNames :: UserPhrase -> (Text,Text)
+takeCityNames (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ [(cityNameInLanguage,cityNameForServer)] ) = (cityNameInLanguage,cityNameForServer)

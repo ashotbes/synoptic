@@ -25,6 +25,8 @@ import           Types.Lang           ( Language (..) )
 
 main :: IO ()
 main = do
+--  currDir <- getCurrentDirectory
+--  neededDir <- setCurrentDirectory $ (getCurrentDirectory ++ "/i18n")
   content <- B.readFile "/home/ashot/synoptic/i18n/ru.yaml"
   let parsedContent = Y.decodeEither' content :: Either Y.ParseException UserPhrase
   case parsedContent of
@@ -35,7 +37,7 @@ main = do
       print fileNames
       language <- TIO.getLine
       if (Data.Text.toLower $ language) == "ru"
-        then do  
+        then do
           TIO.putStrLn (choosDate $ phrase)
           currentTime <- getCurrentTime
           dateFromUser <- Prelude.getLine
@@ -45,7 +47,7 @@ main = do
             Right correctDate -> do
               TIO.putStrLn $ (choosCity $ phrase)
               TIO.putStrLn $ Data.Text.intercalate ", " $ supportedCities Ru
-              --TIO.putStrLn $ (takeCityName $ phrase)
+    --          TIO.putStrLn $ (takeCityNames $ phrase)
               cityFromUser <- TIO.getLine
               let city = getCityFromUser cityFromUser Ru
               case city of
