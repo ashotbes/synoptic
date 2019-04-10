@@ -6,6 +6,7 @@ import           Data.Text
 --import qualified Data.Text.IO      as TIO
 import qualified Data.Yaml         as Y
 import           Types.UserPhrases
+import           Data.List
 
 parseYaml :: ByteString -> Maybe UserPhrase
 parseYaml rawYAML = do
@@ -50,5 +51,13 @@ messthrowCity( UserPhrase _ _ _ _ _ _ _ _ _  _ _ throwCity _) = throwCity
 messUnexpectedthrow :: UserPhrase -> Text
 messUnexpectedthrow (UserPhrase _ _ _ _ _ _ _ _ _ _ _ unexpectedthrow _ ) = unexpectedthrow
 
-takeCityNames :: UserPhrase -> (Text,Text)
-takeCityNames (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ [(cityNameInLanguage,cityNameForServer)] ) = (cityNameInLanguage,cityNameForServer)
+takeCityNames :: UserPhrase -> [Text]
+takeCityNames (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ citiesInfo) = Prelude.map fst citiesInfo
+
+
+findOurCity :: [Text] -> Text -> Maybe [Text]
+findOurCity citiesInfo city = 
+  let ourCity = Data.List.find (\city -> citiesInfo == city) citiesInfo
+  in case ourCity of
+    Nothing  -> Nothing
+    Just our -> Just our

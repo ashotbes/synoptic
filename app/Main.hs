@@ -12,7 +12,7 @@ import           Control.Exception
 import           Data.Text
 import           Data.Text.IO         as TIO
 import           Data.Time.Clock
---import           System.FilePath.Posix
+import           System.FilePath.Posix
 import qualified Data.ByteString      as B
 import qualified Data.Yaml            as Y
 import           Types.UserPhrases    ( UserPhrase (..) )
@@ -25,16 +25,17 @@ import           Types.Lang           ( Language (..) )
 
 main :: IO ()
 main = do
---  currDir <- getCurrentDirectory
---  neededDir <- setCurrentDirectory $ (getCurrentDirectory ++ "/i18n")
-  content <- B.readFile "/home/ashot/synoptic/i18n/ru.yaml"
+  currentDir <- getCurrentDirectory
+  let langFile    = currentDir </> "i18n" </> "ru.yaml"
+      langFolder  = currentDir </> "i18n"
+  print (listDirectory langFolder)
+  print langFile
+  content <- B.readFile langFile
   let parsedContent = Y.decodeEither' content :: Either Y.ParseException UserPhrase
   case parsedContent of
     Left err -> throw $ err
     Right phrase -> do
       TIO.putStrLn (choosLang $ phrase)
-      fileNames <- getDirectoryContents "/home/ashot/synoptic/i18n"
-      print fileNames
       language <- TIO.getLine
       if (Data.Text.toLower $ language) == "ru"
         then do
@@ -47,7 +48,7 @@ main = do
             Right correctDate -> do
               TIO.putStrLn $ (choosCity $ phrase)
               TIO.putStrLn $ Data.Text.intercalate ", " $ supportedCities Ru
-    --          TIO.putStrLn $ (takeCityNames $ phrase)
+              print (takeCityNames $ phrase)
               cityFromUser <- TIO.getLine
               let city = getCityFromUser cityFromUser Ru
               case city of

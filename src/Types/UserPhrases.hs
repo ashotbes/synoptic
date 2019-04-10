@@ -23,5 +23,4 @@ data UserPhrase = UserPhrase
     messageErrorWrongCity     :: Text ,
     messageUnexpectedError    :: Text ,
     cities                    :: [(Text,Text)]
-   }
-   deriving (Show,Generic)
+   } deriving (Show,Generic)
