@@ -1,19 +1,10 @@
+{-# LANGUAGE OverloadedStrings  #-}
+
 module DecodeYaml where
 
-import           Control.Exception
-import           Data.ByteString (ByteString)
 import           Data.Text
 --import qualified Data.Text.IO      as TIO
-import qualified Data.Yaml         as Y
 import           Types.UserPhrases
-import           Data.List
-
-parseYaml :: ByteString -> Maybe UserPhrase
-parseYaml rawYAML = do
-    let result = Y.decodeEither' rawYAML :: Either Y.ParseException UserPhrase
-    case result of
-        Right ok -> Just ok
-        Left prob -> throw $ prob
 
 choosLang :: UserPhrase -> Text
 choosLang (UserPhrase messChoosLang _ _ _ _ _ _ _ _ _ _ _ _) = messChoosLang
@@ -52,12 +43,10 @@ messUnexpectedthrow :: UserPhrase -> Text
 messUnexpectedthrow (UserPhrase _ _ _ _ _ _ _ _ _ _ _ unexpectedthrow _ ) = unexpectedthrow
 
 takeCityNames :: UserPhrase -> [Text]
-takeCityNames (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ citiesInfo) = Prelude.map fst citiesInfo
+takeCityNames (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ citiesInfo) = citiesInfo
 
+takeFstElem :: [Text]  -> Text
+takeFstElem citiesInfo = Data.Text.concat citiesInfo
 
-findOurCity :: [Text] -> Text -> Maybe [Text]
-findOurCity citiesInfo city = 
-  let ourCity = Data.List.find (\city -> citiesInfo == city) citiesInfo
-  in case ourCity of
-    Nothing  -> Nothing
-    Just our -> Just our
+{-takeFstElem :: [Text]  -> Text
+takeFstElem citiesInfo = [Data.Text.concat (fst $ Data.Text.splitOn "," names | names <- citiesInfo)]-}

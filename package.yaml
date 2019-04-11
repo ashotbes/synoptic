@@ -30,6 +30,7 @@ library:
     - time
     - bytestring
     - http-client
+    - containers
   ghc-options: -Wall -Werror
 
 executables:

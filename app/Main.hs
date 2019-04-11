@@ -1,5 +1,5 @@
-{-# LANGUAGE MultiWayIf        #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE MultiWayIf        #-}
 
 module Main where
 
@@ -8,7 +8,6 @@ import           CheckDateAndCity     ( getCityFromUser,
                                         getDateFromUser, reportAboutProblem
                                       )
 
-import           Control.Exception
 import           Data.Text
 import           Data.Text.IO         as TIO
 import           Data.Time.Clock
@@ -17,6 +16,7 @@ import qualified Data.ByteString      as B
 import qualified Data.Yaml            as Y
 import           Types.UserPhrases    ( UserPhrase (..) )
 import           System.Directory
+import           System.Exit
 
 import           DecodeYaml
 import           ConversionWithCities ( supportedCities )
@@ -28,18 +28,20 @@ main = do
   currentDir <- getCurrentDirectory
   let langFile    = currentDir </> "i18n" </> "ru.yaml"
       langFolder  = currentDir </> "i18n"
-  print (listDirectory langFolder)
-  print langFile
-  content <- B.readFile langFile
-  let parsedContent = Y.decodeEither' content :: Either Y.ParseException UserPhrase
+  con <- B.readFile $ langFolder </> langFile
+  let parsedContent = Y.decodeThrow con :: Maybe UserPhrase
   case parsedContent of
-    Left err -> throw $ err
-    Right phrase -> do
+    Nothing -> die "Sorry,we cant Decode this file!"
+    Just phrase -> do
+      let cityNames = (takeCityNames $ phrase)
       TIO.putStrLn (choosLang $ phrase)
+      fileNames <- listDirectory langFolder
+      print fileNames
       language <- TIO.getLine
       if (Data.Text.toLower $ language) == "ru"
         then do
           TIO.putStrLn (choosDate $ phrase)
+          TIO.putStrLn (takeFstElem $ cityNames)
           currentTime <- getCurrentTime
           dateFromUser <- Prelude.getLine
           let date = getDateFromUser currentTime dateFromUser phrase
@@ -57,4 +59,4 @@ main = do
                   response <- askWeather (correctDate, correctCity)
                   let answer = prepareAnswer Ru response correctDate correctCity phrase
                   TIO.putStrLn answer
-                  else return ()
+                  else TIO.putStrLn "Please select one of the suggested languages!"

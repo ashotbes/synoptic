@@ -22,5 +22,5 @@ data UserPhrase = UserPhrase
     messageErrorWrongDate     :: Text ,
     messageErrorWrongCity     :: Text ,
     messageUnexpectedError    :: Text ,
-    cities                    :: [(Text,Text)]
+    cities                    :: [Text]
    } deriving (Show,Generic)
