@@ -30,14 +30,8 @@ library
       AskWeatherFromServer
       DecodeYaml
       CheckDateAndCity
-      I18n.Am
-      I18n.En
-      I18n.Ru
       PrepareAnswer
-      ConversionWithCities
-      Types.FullWeatherInfo
-      Types.Lang
-      Types.City
+      Types.FullWeatherInfo      
       Types.Weather
       Types.UserPhrases
       ShowAnswer

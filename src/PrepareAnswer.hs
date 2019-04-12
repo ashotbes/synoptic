@@ -13,17 +13,15 @@ import           Data.Time.Clock.POSIX ( utcTimeToPOSIXSeconds )
 import           Network.HTTP.Client   ( Response, responseBody )
 
 import           ShowAnswer            ( showInfo )
-import           Types.City
 import           Types.FullWeatherInfo
-import           Types.Lang
 
 -- Функция,которая выдает информацию о погоде
 
 prepareAnswer
-  :: Language -> Response BSL.ByteString -> UTCTime -> City -> UserPhrase -> Text
-prepareAnswer lang response dateFromUser cityFromUser phrase  = finalPhrase
+  :: Response BSL.ByteString -> UTCTime -> Text -> UserPhrase -> Text
+prepareAnswer response dateFromUser cityFromUser phrase  = finalPhrase
     where
-      finalPhrase    = showInfo lang forecastToMain cityFromUser dateFromUser phrase
+      finalPhrase    = showInfo forecastToMain cityFromUser dateFromUser phrase
       forecastToMain = prepareMainInfo (fromJust $ oneForecast)
       oneForecast    = findOurForecast listOfForecast dateFromUser
       listOfForecast = extractListOfForecasts (fromJust weatherValues)

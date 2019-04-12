@@ -19,9 +19,7 @@ import           System.Directory
 import           System.Exit
 
 import           DecodeYaml
-import           ConversionWithCities ( supportedCities )
 import           PrepareAnswer        ( prepareAnswer )
-import           Types.Lang           ( Language (..) )
 
 main :: IO ()
 main = do
@@ -34,14 +32,15 @@ main = do
     Nothing -> die "Sorry,we cant Decode this file!"
     Just phrase -> do
       let cityNames = (takeCityNames $ phrase)
-      TIO.putStrLn (choosLang $ phrase)
+          allCities = takeFstElem $ cityNames
+      TIO.putStrLn allCities
       fileNames <- listDirectory langFolder
       print fileNames
       language <- TIO.getLine
       if (Data.Text.toLower $ language) == "ru"
         then do
           TIO.putStrLn (choosDate $ phrase)
-          TIO.putStrLn (takeFstElem $ cityNames)
+  --        TIO.putStrLn (takeFstElem $ cityNames)
           currentTime <- getCurrentTime
           dateFromUser <- Prelude.getLine
           let date = getDateFromUser currentTime dateFromUser phrase
@@ -49,14 +48,13 @@ main = do
             Left problemWithDate -> TIO.putStrLn problemWithDate
             Right correctDate -> do
               TIO.putStrLn $ (choosCity $ phrase)
-              TIO.putStrLn $ Data.Text.intercalate ", " $ supportedCities Ru
-              print (takeCityNames $ phrase)
+    --          print (takeCityNames $ phrase)
               cityFromUser <- TIO.getLine
-              let city = getCityFromUser cityFromUser Ru
+              let city = getCityFromUser cityNames cityFromUser
               case city of
-                Nothing -> reportAboutProblem phrase
+                Nothing -> reportAboutProblem phrase 
                 Just correctCity -> do
                   response <- askWeather (correctDate, correctCity)
-                  let answer = prepareAnswer Ru response correctDate correctCity phrase
+                  let answer = prepareAnswer response correctDate correctCity phrase
                   TIO.putStrLn answer
                   else TIO.putStrLn "Please select one of the suggested languages!"

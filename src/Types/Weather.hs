@@ -12,7 +12,7 @@ instance FromJSON Weather
 
 -- JSON тип
 
-data Weather = Weather
+data Weather = Weather 
     { id          :: Int
     , main        :: Text
     , description :: Text

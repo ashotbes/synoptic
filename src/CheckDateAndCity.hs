@@ -10,9 +10,8 @@ import           Data.Time.Format     ( defaultTimeLocale, parseTimeM )
 
 --import           DecodeYaml
 import           Types.UserPhrases
-import           ConversionWithCities
-import           Types.City
-import           Types.Lang
+--import           Types.City
+--import           Types.Lang
 
 -- Сообщаем о проблемах,которые могут возникнуть
 
@@ -45,8 +44,8 @@ getDateFromUser currentTime dateFromUser (UserPhrase _ _ _ _ _ _ _ _ _ _ errorDa
 
 -- Получаем город от пользователя и здесь же проверяем
 
-getCityFromUser :: Text -> Language -> Maybe City
-getCityFromUser city lang = do
-    if city `elem` supportedCities lang
-       then textToCity lang city
+getCityFromUser :: [Text] -> Text -> Maybe Text
+getCityFromUser allCities city = do
+    if elem city allCities
+       then Just city
        else Nothing
