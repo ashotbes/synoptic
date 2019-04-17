@@ -45,8 +45,8 @@ messUnexpectedthrow (UserPhrase _ _ _ _ _ _ _ _ _ _ _ unexpectedthrow _ ) = unex
 takeCityNames :: UserPhrase -> [Text]
 takeCityNames (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ citiesInfo) = citiesInfo
 
-takeFstElem :: [Text]  -> Text
-takeFstElem citiesInfo = Data.Text.concat citiesInfo
+takeAllElem :: [Text]  -> Text
+takeAllElem citiesInfo1 = Data.Text.concat citiesInfo1
 
 {-takeFstElem :: [Text]  -> Text
 takeFstElem citiesInfo = [Data.Text.concat (fst $ Data.Text.splitOn "," names | names <- citiesInfo)]-}
