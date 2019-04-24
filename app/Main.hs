@@ -32,18 +32,19 @@ main = do
     Nothing -> die "Sorry,we cant Decode this file!"
     Just phrase -> do
       let cityNames = (takeCityNames $ phrase) -- :: [Text]
+          allCItyNames = takeAllElem $ cityNames
   --    TIO.putStrLn $ Data.Text.concat $ cityNames
   --    TIO.putStrLn allCities
 --      print $ fst . snd $ (Data.Text.splitAt 10 allCities )
 --      print $ (Prelude.map Prelude.head $  Data.Text.splitOn "," (Data.Text.concat $  cityNames))
       TIO.putStrLn $  (choosLang $ phrase )
+      TIO.putStrLn $ T.concat $ (splitOn ", " allCItyNames)
       fileNames <- listDirectory langFolder
       print fileNames
       language <- TIO.getLine
       if (T.toLower $ language) == "ru"
         then do
           TIO.putStrLn (choosDate $ phrase)
-    --      TIO.putStrLn $  fst ( Data.Text.splitAt 2 (Prelude.concat $ takeCityNames phrase))
           TIO.putStrLn $ T.concat cityNames
           currentTime <- getCurrentTime
           dateFromUser <- Prelude.getLine
@@ -52,7 +53,7 @@ main = do
             Left problemWithDate -> TIO.putStrLn problemWithDate
             Right correctDate -> do
               TIO.putStrLn $ (choosCity $ phrase)
-    --          print (takeCityNames $ phrase)
+              TIO.putStrLn $ T.concat $ (splitOn ", " $ T.concat $ (takeCityNames $ phrase))
               cityFromUser <- TIO.getLine
               let city = getCityFromUser cityNames cityFromUser
               case city of

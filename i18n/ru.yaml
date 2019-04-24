@@ -12,17 +12,17 @@ messageErrorWrongCity     : "Вы ввели неверный город,пож�
 messageUnexpectedError    : "Что-то пошло не так)"
 
 cities:
-  - Aragatsotn,Aragatsotn
-  - Ararat,Ararat
-  - Armavir,Armavir
-  - Дилижан,Dilijan
-  - Гехаркуник,Gegharkunik
-  - Гюмри,Gyumri
-  - Котайк,Kotayk
-  - Ширак,Shirak
-  - Сюник,Syunik
-  - Ванадзор,Vanadzor
-  - Ереван,Yerevan
+  - Арагатсотн,Aragatsotn,
+  - Арарат,Ararat,
+  - Армавир,Armavir,
+  - Дилижан,Dilijan,
+  - Гехаркуник,Gegharkunik,
+  - Гюмри,Gyumri,
+  - Котайк,Kotayk,
+  - Ширак,Shirak,
+  - Сюник,Syunik,
+  - Ванадзор,Vanadzor,
+  - Ереван,Yerevan,
 
 #    - Арагацотн,Aragatsotn
 #    - Арарат,Ararat
