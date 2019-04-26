@@ -46,7 +46,4 @@ takeCityNames :: UserPhrase -> [Text]
 takeCityNames (UserPhrase _ _ _ _ _ _ _ _ _ _ _ _ citiesInfo) = citiesInfo
 
 takeAllElem :: [Text]  -> Text
-takeAllElem citiesInfo1 = Data.Text.concat citiesInfo1
-
-{-takeFstElem :: [Text]  -> Text
-takeFstElem citiesInfo = [Data.Text.concat (fst $ Data.Text.splitOn "," names | names <- citiesInfo)]-}
+takeAllElem citiesInfo = Data.Text.concat citiesInfo

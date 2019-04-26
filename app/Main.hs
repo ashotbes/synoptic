@@ -38,7 +38,8 @@ main = do
 --      print $ fst . snd $ (Data.Text.splitAt 10 allCities )
 --      print $ (Prelude.map Prelude.head $  Data.Text.splitOn "," (Data.Text.concat $  cityNames))
       TIO.putStrLn $  (choosLang $ phrase )
-      TIO.putStrLn $ T.concat $ (splitOn ", " allCItyNames)
+      --TIO.putStrLn $ T.concat $ (splitOn ", " allCItyNames)
+      print $ (splitOn ", " allCItyNames)
       fileNames <- listDirectory langFolder
       print fileNames
       language <- TIO.getLine
