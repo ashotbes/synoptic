@@ -1,25 +1,25 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE MultiWayIf        #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Main where
 
-import           AskWeatherFromServer ( askWeather )
-import           CheckDateAndCity     ( getCityFromUser,
-                                        getDateFromUser, reportAboutProblem
-                                      )
+import           AskWeatherFromServer  (askWeather)
+import           CheckDateAndCity      (getCityFromUser, getDateFromUser,
+                                        reportAboutProblem)
 
-import           Data.Text as T
-import           Data.Text.IO         as TIO
+import qualified Data.ByteString       as B
+import           Data.List             (filter, unzip)
+import           Data.Text             as T
+import           Data.Text.IO          as TIO
 import           Data.Time.Clock
-import           System.FilePath.Posix
-import qualified Data.ByteString      as B
-import qualified Data.Yaml            as Y
-import           Types.UserPhrases    ( UserPhrase (..) )
+import qualified Data.Yaml             as Y
 import           System.Directory
 import           System.Exit
+import           System.FilePath.Posix
+import           Types.UserPhrases     (UserPhrase (..))
 
 import           DecodeYaml
-import           PrepareAnswer        ( prepareAnswer )
+import           PrepareAnswer         (prepareAnswer)
 
 main :: IO ()
 main = do
@@ -33,6 +33,13 @@ main = do
     Just phrase -> do
       let cityNames = (takeCityNames $ phrase) -- :: [Text]
           allCItyNames = takeAllElem $ cityNames
+          result' = [ let names = T.splitOn (",") twoNames
+                          [nameForHuman, nameForServer] = Data.List.filter (not . T.null) names
+                      in (nameForHuman, nameForServer)
+                    | twoNames <- cityNames
+                    ]
+          (allNamesForHumans, _allNamesForServer) = unzip result'
+      TIO.putStrLn $ T.intercalate "," allNamesForHumans
   --    TIO.putStrLn $ Data.Text.concat $ cityNames
   --    TIO.putStrLn allCities
 --      print $ fst . snd $ (Data.Text.splitAt 10 allCities )
