@@ -41,11 +41,16 @@ executables:
       - -threaded
       - -rtsopts
       - -with-rtsopts=-N
+      - -Wall
+      - -Werror
     dependencies:
-      - synoptic
-      - text
+      - bytestring
+      - directory
       - filepath
-    ghc-options: -Wall -Werror
+      - synoptic
+      - time
+      - text
+      - yaml
 
 tests:
   synoptic-test:
