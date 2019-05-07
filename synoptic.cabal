@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 17e11124e827f66c5b0e6c2dd753acdeb5593e63485c804c7f6f0ade3e96faaf
+-- hash: 57355e0746bd18b339eb5c1161d1a86b798f8d9325aeac5f90bf99e997411e5e
 
 name:           synoptic
 version:        0.1.0.0
@@ -62,6 +62,7 @@ executable synoptic-exe
     , bytestring
     , directory
     , filepath
+    , http-client
     , synoptic
     , text
     , time

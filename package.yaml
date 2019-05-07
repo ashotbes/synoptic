@@ -51,6 +51,7 @@ executables:
       - time
       - text
       - yaml
+      - http-client
 
 tests:
   synoptic-test:

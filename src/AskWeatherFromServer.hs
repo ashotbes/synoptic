@@ -1,15 +1,20 @@
 module AskWeatherFromServer where
 
+import           Data.ByteString.Lazy (ByteString)
 import           Data.Text
-import           Data.ByteString.Lazy ( ByteString )
-import           Data.Time.Clock      ( UTCTime )
-import           Network.HTTP.Client  ( Response, defaultManagerSettings,
-                                        httpLbs, newManager, parseRequest )
+import           Network.HTTP.Client  (Response, defaultManagerSettings,
+                                       httpLbs, newManager, parseRequest,
+                                       responseBody)
 
 -- Отправляем запрос на сервер и получаем ответ
 
-askWeather :: (UTCTime,[Text]) -> IO (Response ByteString)
-askWeather (_, userCity) = do
+askWeather :: Text -> IO (Response ByteString)
+askWeather cityFromUser = do
     manager <- newManager defaultManagerSettings
-    request <- parseRequest $ "http://api.openweathermap.org/data/2.5/forecast?q=" ++ show userCity ++ ",am&mode=json&appid=9e23b1eea9c1da6e75d81b6271c0379c"
+    request <- parseRequest $ "http://api.openweathermap.org/data/2.5/forecast?q="
+                              <> unpack cityFromUser
+                              <> ",am&mode=json&appid=9e23b1eea9c1da6e75d81b6271c0379c"
     httpLbs request manager
+
+rawResponse :: Response ByteString -> ByteString
+rawResponse = responseBody
