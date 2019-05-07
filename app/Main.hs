@@ -1,6 +1,7 @@
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE MultiWayIf        #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE LambdaCase          #-}
+{-# LANGUAGE MultiWayIf          #-}
+{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Main where
 
@@ -10,7 +11,9 @@ module Main where
 
 --import           GHC.List              as L
 --import           Data.Maybe
+import           Control.Exception
 import qualified Data.ByteString       as B
+import qualified Data.ByteString.Char8 as BCH
 import qualified Data.List             as L
 import qualified Data.Text             as T
 import qualified Data.Text.IO          as TIO
@@ -24,23 +27,36 @@ import           System.FilePath.Posix
 --import           DecodeYaml
 --import           PrepareAnswer         (prepareAnswer)
 
-tupleToList :: [(a,a)] -> [a]
-tupleToList ((a,b):xs) = a : b : tupleToList xs
-tupleToList _          = []
-
 main :: IO ()
 main = do
     currentDirectory <- getCurrentDirectory
+    -- Check a directory with language files.
     let langDirectory = currentDirectory </> "i18n"
     allLangFiles <- listDirectory langDirectory >>= \case
-        [] -> die $ "Sorry, but I cannot continue without language support. " ++
-                    "Please make sure the directory " ++ langDirectory ++ " exists."
+        [] -> die $ "Sorry, but I cannot continue without language support. "
+                    <> "Please make sure the directory "
+                    <> langDirectory
+                    <> " exists and contains at least one language .yaml-file."
         allLangFiles -> return allLangFiles
+    -- We use pure names of language files to form a list for the user.
     let pureNamesOfLangs = map takeBaseName allLangFiles
-    putStrLn $ "Please choose your language: " ++ L.intercalate ", " pureNamesOfLangs
+    putStrLn $ "Please choose a language: " ++ L.intercalate ", " pureNamesOfLangs
     language <- TIO.getLine
-    let preparedLanguage = T.toLower language
-        correspondingLangFile = L.find (\langFile -> preparedLanguage == T.pack (takeBaseName langFile)) allLangFiles
+    let preparedLanguage = T.toLower language -- User may use different case on his keyboard.
+        Just correspondingLangFile = L.find (\langFile -> preparedLanguage == T.pack (takeBaseName langFile))
+                                            allLangFiles
+        pathToLangFile = langDirectory </> correspondingLangFile
+    langFileContent <- try (B.readFile pathToLangFile) >>= \case
+        Left (someProblem :: IOException) -> die $ "Sorry, I cannot open language file "
+                                                   <> pathToLangFile
+                                                   <> ": "
+                                                   <> show someProblem
+        Right langFileContent -> return langFileContent
+
+    BCH.putStrLn langFileContent
+  --  con <- B.readFile $ langFolder </> langFile
+    error "AAAAAAAAAAAAA"
+        {-
         con <- B.readFile $ langFolder </> langFile
         let parsedContent = Y.decodeThrow con :: Maybe UserPhrase
         case parsedContent of
@@ -79,3 +95,4 @@ main = do
                                           let answer = prepareAnswer response correctDate correctCity phrase
                                           TIO.putStrLn answer
                                           else TIO.putStrLn "Please select one of the suggested languages!"
+                                          -}
