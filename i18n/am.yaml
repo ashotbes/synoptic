@@ -1,0 +1,25 @@
+messageChooseLanguage       : "Խնդրում ենք ընտրել լեզուն!"
+messageChooseForecastDate   : "Նշեք կանխատեսման ամսաթիվը"
+messageChooseForecastCity   : "Նշեք քաղաքը կանխատեսման համար"
+messageForecast             : "Եղանակի մասին տեղեկություններ: "
+on                          : ""
+messageAboutTemperature     : "Ջերմաստիճանը: "
+messageAboutPressure        : " Ճնշումը: "
+pressureDesignation         : " տոր "
+humidity                    : "Խոնավությունը: "
+messageErrorWrongDate       : "Դուք անվավեր ամսաթիվ եք մուտքագրել, ուղղեք այն:"
+messageErrorWrongCity       : "Դուք մուտքագրել եք անվավեր քաղաք"
+messageUnexpectedError      : "Ինչ որ բան այնպես չգնաց"
+
+cities:
+  - Արագածոտն,Aragatsotn
+  - Արարատ,Ararat
+  - Արմավիր,Armavir
+  - Դիլիջան,Dilijan
+  - Գեղարքունիք,Gegharkunik
+  - Գյումրի,Gyumri
+  - Կոտայք,Kotayk
+  - Շիրակ,Shirak
+  - Սյունիք,Syunik
+  - Վանաձոր,Vanadzor
+  - Երեւան,Yerevan
