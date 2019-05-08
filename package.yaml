@@ -30,7 +30,6 @@ library:
     - time
     - bytestring
     - http-client
-    - containers
   ghc-options: -Wall -Werror
 
 executables:
@@ -51,7 +50,6 @@ executables:
       - time
       - text
       - yaml
-      - http-client
 
 tests:
   synoptic-test:
