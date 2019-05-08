@@ -1,4 +1,4 @@
-messageChooseLanguage     : "Пожалуйста,один из предлагаемых языков!"
+messageChooseLanguage     : "Пожалуйста,укажите один из предлагаемых языков!"
 messageChooseForecastDate : "Пожалуйста, укажите дату прогноза!"
 messageChooseForecastCity : "Пожалуйста, укажите город!"
 messageForecast           : "Информация о погоде в "

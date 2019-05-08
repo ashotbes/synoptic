@@ -1,0 +1,25 @@
+messageChooseLanguage       : "Please select one of the suggested languages!"
+messageChooseForecastDate   : "Please, enter a date for the forecast!"
+messageChooseForecastCity   : "Please, specify a city for the forecast!"
+messageForecast             : "Forecast for "
+on                          : "at "
+messageAboutTemperature     : "Temperature is: "
+messageAboutPressure        : " Air pressure is: "
+pressureDesignation         : " mm Hg "
+humidity                    : "Humidity: "
+messageErrorWrongDate       : "You entered an invalid Date!"
+messageErrorWrongCity       : "You entered an invalid City!"
+messageUnexpectedError      : "Something went wrong"
+
+cities:
+  - Aragatsotn,Aragatsotn
+  - Ararat,Ararat
+  - Armavir,Armavir
+  - Dilijan,Dilijan
+  - Gegharkunik,Gegharkunik
+  - Gyumri,Gyumri
+  - Kotayk,Kotayk
+  - Shirak,Shirak
+  - Syunik,Syunik
+  - Vanadzor,Vanadzor
+  - Yerevan,Yerevan
