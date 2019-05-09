@@ -7,8 +7,6 @@ import           Data.Text             ( Text )
 import           Data.Time.Clock.POSIX ( POSIXTime )
 import           GHC.Generics          ( Generic )
 
-import           Types.Weather         ( Weather )
-
 -- JSON типы
 
 instance ToJSON   FullWeatherInfo
@@ -49,7 +47,6 @@ data InfoAboutForecast = InfoAboutForecast
     { dt      :: POSIXTime
     , dt_txt  :: Text
     , main    :: MainWeatherInfo
-    , weather :: [Weather]
     , clouds  :: Clouds
     , wind    :: Wind
     , sys     :: Sys

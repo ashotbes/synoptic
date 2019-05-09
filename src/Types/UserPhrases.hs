@@ -2,9 +2,9 @@
 
 module Types.UserPhrases where
 
-import           Data.Aeson
-import           Data.Text
-import           GHC.Generics
+import           Data.Aeson   ( ToJSON, FromJSON )
+import           Data.Text    ( Text)
+import           GHC.Generics ( Generic )
 
 instance ToJSON   UserPhrase
 instance FromJSON UserPhrase
