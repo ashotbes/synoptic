@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0b45326935f6f06290ca605dec157bb2a5627fefffe2c0978dfc61cb4a89f19d
+-- hash: 012f976be34d75b70c9acaf36cee9a3237e1994c9c88cb4b2006a1cff2518648
 
 name:           synoptic
 version:        0.1.0.0
@@ -28,12 +28,10 @@ source-repository head
 library
   exposed-modules:
       AskWeatherFromServer
-      CheckDateAndCity
+      CheckDate
       PrepareAnswer
-      ShowAnswer
       Types.FullWeatherInfo
       Types.UserPhrases
-      Types.Weather
   other-modules:
       Paths_synoptic
   hs-source-dirs:

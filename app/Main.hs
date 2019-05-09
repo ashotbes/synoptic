@@ -5,21 +5,21 @@
 
 module Main where
 
-import           AskWeatherFromServer  (askWeather)
-import           CheckDateAndCity      (getDateFromUser)
-import           PrepareAnswer         (prepareAnswer)
-import           Types.UserPhrases     (UserPhrase (..))
+import           AskWeatherFromServer  ( askWeather )
+import           CheckDate             ( checkDateFromUser )
+import           PrepareAnswer         ( prepareAnswer )
+import           Types.UserPhrases     ( UserPhrase (..) )
 
-import           Control.Exception
-import qualified Data.ByteString       as B
-import qualified Data.List             as L
-import qualified Data.Text             as T
-import qualified Data.Text.IO          as TIO
-import           Data.Time.Clock
-import qualified Data.Yaml             as Y
-import           System.Directory
-import           System.Exit
-import           System.FilePath.Posix
+import           Control.Exception            ( IOException, try )
+import qualified Data.ByteString       as B   ( readFile )
+import qualified Data.List             as L   ( find, filter ,lookup, intercalate )
+import qualified Data.Text             as T   ( toLower, pack, splitOn, null, intercalate ) 
+import qualified Data.Text.IO          as TIO ( putStrLn, getLine )
+import           Data.Time.Clock              ( getCurrentTime )
+import qualified Data.Yaml             as Y   ( decodeThrow )
+import           System.Directory             ( getCurrentDirectory, listDirectory )
+import           System.Exit                  ( die )
+import           System.FilePath.Posix        ( takeBaseName, (</>) )
 
 main :: IO ()
 main = do
@@ -67,15 +67,15 @@ main = do
     cityNameForServer <- case L.lookup cityFromUser pairsOfCityNames of
         Nothing -> do
             TIO.putStrLn $ messageErrorWrongCity phrasesForUser
-            die "Sorry!"
+            die ""
         Just cityNameForServer -> return cityNameForServer
     -- Ask user for a date of forecast.
     TIO.putStrLn $ messageChooseForecastDate phrasesForUser
     -- We need actual date to check user's date.
     currentTime <- getCurrentTime
     dateFromUser <- Prelude.getLine
-    correctDate <- case getDateFromUser currentTime dateFromUser phrasesForUser of
-        Left problemWithDate -> TIO.putStrLn problemWithDate >> die "Sorry, I cannot continue!"
+    correctDate <- case checkDateFromUser currentTime dateFromUser phrasesForUser of
+        Left problemWithDate -> TIO.putStrLn problemWithDate >> die ""
         Right correctDate    -> return correctDate
     -- Ask a weather from the server.
     responseFromServer <- askWeather cityNameForServer

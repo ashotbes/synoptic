@@ -1,10 +1,10 @@
 module AskWeatherFromServer where
 
-import           Data.ByteString.Lazy (ByteString)
-import           Data.Text
-import           Network.HTTP.Client  (Response, defaultManagerSettings,
-                                       httpLbs, newManager, parseRequest,
-                                       responseBody)
+import           Data.ByteString.Lazy ( ByteString )
+import           Data.Text            ( Text, unpack )
+import           Network.HTTP.Client  ( Response, defaultManagerSettings,
+                                        httpLbs, newManager, parseRequest,
+                                        responseBody )
 
 -- Отправляем запрос на сервер и получаем ответ
 
