@@ -1,5 +1,5 @@
 messageChooseLanguage       : "Please select one of the suggested languages!"
-messageChooseForecastDate   : "Please, enter a date for the forecast!"
+messageChooseForecastDate   : "Please, enter a date for the forecast in format YYYY-MM-DD and not more to 5 day ahead!" 
 messageChooseForecastCity   : "Please, specify a city for the forecast!"
 messageForecast             : "Forecast for "
 on                          : "at "
@@ -7,9 +7,10 @@ messageAboutTemperature     : "Temperature is: "
 messageAboutPressure        : " Air pressure is: "
 pressureDesignation         : " mm Hg "
 humidity                    : "Humidity: "
-messageErrorWrongDate       : "You entered an invalid Date!"
+messageErrorWrongDate       : "You have entered an incorrect date, please make sure that the date you entered matches the format and no more than 5 days ahead!"
 messageErrorWrongCity       : "You entered an invalid City!"
 messageUnexpectedError      : "Something went wrong"
+messageErrorWithServer      : "Something is wrong with the server, please try again later!"
 
 cities:
   - Aragatsotn,Aragatsotn

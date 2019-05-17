@@ -1,5 +1,5 @@
 messageChooseLanguage       : "Խնդրում ենք ընտրել լեզուն!"
-messageChooseForecastDate   : "Նշեք կանխատեսման ամսաթիվը"
+messageChooseForecastDate   : "Խնդրում ենք նշել կանխատեսման ամսաթիվը YYYY-MM-DD ձեւաչափով եւ ոչ ավելի, քան 5 օր առաջ:"
 messageChooseForecastCity   : "Նշեք քաղաքը կանխատեսման համար"
 messageForecast             : "Եղանակի մասին տեղեկություններ: "
 on                          : ""
@@ -7,9 +7,10 @@ messageAboutTemperature     : "Ջերմաստիճանը: "
 messageAboutPressure        : " Ճնշումը: "
 pressureDesignation         : " տոր "
 humidity                    : "Խոնավությունը: "
-messageErrorWrongDate       : "Դուք անվավեր ամսաթիվ եք մուտքագրել, ուղղեք այն:"
+messageErrorWrongDate       : "Դուք սխալ ժամանակ եք մտել, խնդրում ենք համոզվել, որ ձեր մուտքագրած ամսաթիվը համապատասխանում է ձեւաչափին եւ ոչ ավելի, քան 5 օր առաջ"
 messageErrorWrongCity       : "Դուք մուտքագրել եք անվավեր քաղաք"
 messageUnexpectedError      : "Ինչ որ բան այնպես չգնաց"
+messageErrorWithServer      : "Ինչ-որ բան սխալ է սերվերի համար, խնդրում ենք կրկին փորձել"
 
 cities:
   - Արագածոտն,Aragatsotn

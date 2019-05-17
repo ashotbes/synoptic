@@ -1,5 +1,5 @@
 messageChooseLanguage     : "Пожалуйста,укажите один из предлагаемых языков!"
-messageChooseForecastDate : "Пожалуйста, укажите дату прогноза!"
+messageChooseForecastDate : "Пожалуйста, укажите дату прогноза в формате ГГГГ-ММ-ДД и не более чем на 5 дней вперед!"
 messageChooseForecastCity : "Пожалуйста, укажите город!"
 messageForecast           : "Информация о погоде в "
 on                        : " на "
@@ -7,9 +7,10 @@ messageAboutTemperature   : " Температура: "
 messageAboutPressure      : " Давление: "
 pressureDesignation       : " мм рт.ст  "
 humidity                  : "Относительная влажность: "
-messageErrorWrongDate     : "Вы ввели неверную дату,пожалуйста исправьте её!"
+messageErrorWrongDate     : "Вы ввели неверную дату,пожалуйста убедитесь что введенная вами дата соответвует формату и не более чем на 5 дней вперед!"
 messageErrorWrongCity     : "Вы ввели неверный город,пожалуйста,укажите город из списка!"
 messageUnexpectedError    : "Что-то пошло не так)"
+messageErrorWithServer    : "Что-то не так с сервером,пожалуйста повторите попытку позже!"
 
 cities:
   - Арагатсотн,Aragatsotn,
@@ -24,14 +25,3 @@ cities:
   - Ванадзор,Vanadzor,
   - Ереван,Yerevan,
 
-#    - Арагацотн,Aragatsotn
-#    - Арарат,Ararat
-#    - Армавир,Armavir
-#    - Дилижан,Dilijan
-#    - Гехаркуник,Gegharkunik
-#    - Гюмри,Gyumri
-#    - Котайк,Kotayk
-#    - Ширак,Shirak
-#    - Сюник,Syunik
-#    - Ванадзор,Vanadzor
-#    - Ереван,Yerevan
