@@ -13,7 +13,7 @@ messageUnexpectedError    : "Что-то пошло не так)"
 messageErrorWithServer    : "Что-то не так с сервером,пожалуйста повторите попытку позже!"
 
 cities:
-  - Арагатсотн,Aragatsotn,
+  - Арагатсотн,Aragatsotn 
   - Арарат,Ararat,
   - Армавир,Armavir,
   - Дилижан,Dilijan,

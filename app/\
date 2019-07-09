@@ -8,13 +8,13 @@ module Main where
 import           AskWeatherFromServer         ( askWeather )
 import           CheckDate                    ( checkDateFromUser )
 import           PrepareAnswer                ( prepareAnswer )
-import             Types.UserPhrases            ( UserPhrase (..) )
+import           Types.UserPhrases            ( UserPhrase (..) )
  
 import           Network.HTTP.Simple          
 import           Control.Exception            ( IOException, try )
 import qualified Data.ByteString       as B   ( readFile )
 import qualified Data.List             as L   ( find, filter ,lookup, intercalate )
-import qualified Data.Text             as T   ( toLower, pack, splitOn, null, intercalate, toTitle )
+import qualified Data.Text             as T   ( toLower, pack, splitOn, null, intercalate, concat )
 import qualified Data.Text.IO          as TIO ( putStrLn, getLine )
 import           Data.Time.Clock              ( getCurrentTime )
 import qualified Data.Yaml             as Y   ( decodeThrow )
@@ -54,9 +54,9 @@ main = do
         Nothing             -> die "Sorry, I cannot parse language file."
         Just phrasesForUser -> return phrasesForUser  
     -- Extract cities' names (for human and for server).
-    let cityNames = cities phrasesForUser
+    let cityNames = T.toLower $ cities phrasesForUser
         pairsOfCityNames = [ let names = T.splitOn (",") twoNames
-                                 [nameForHuman, nameForServer] = L.filter (not . T.null) names
+                                 [nameForHuman, nameForServer] = L.filter (not . T.null) (names)
                              in (nameForHuman, nameForServer)
                            | twoNames <- cityNames
                            ]
@@ -64,7 +64,7 @@ main = do
     -- Show all supported cities (already in chosen language).
     TIO.putStrLn $ messageChooseForecastCity phrasesForUser
     TIO.putStrLn $ T.intercalate ", " allNamesForHumans
-    cityFromUser <- T.toTitle <$> TIO.getLine 
+    cityFromUser <- TIO.getLine 
     -- Find corresponding name of the city, but for the server.
     cityNameForServer <- case L.lookup cityFromUser pairsOfCityNames of
         Nothing -> do
@@ -86,9 +86,9 @@ main = do
         then TIO.putStrLn $ messageUnexpectedError phrasesForUser 
         else do 
             let finalAnswer = prepareAnswer responseFromServer
-                                             correctDate
-                                             cityFromUser
-                                             phrasesForUser 
+                                            correctDate
+                                            cityNameForServer
+                                            phrasesForUser 
             TIO.putStrLn finalAnswer
 
  -- Form the final response for the user.
