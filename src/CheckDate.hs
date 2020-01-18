@@ -22,7 +22,7 @@ round' mark
 
 checkDateFromUser :: UTCTime -> String -> UserPhrase -> Either Text UTCTime
 checkDateFromUser currentTime dateFromUser (UserPhrase _ _ _ _ _ _ _ _ _ errorDate _ _ _)  = do
-    let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (dateFromUser ++ " 12:00:00") :: Maybe UTCTime
+    let dayFromUser = parseTimeM True defaultTimeLocale "%Y-%m-%d %H:%M:%S" (dateFromUser ++ " 15:00:00") :: Maybe UTCTime
     case dayFromUser of
       Nothing -> Left $ errorDate
       Just validDay -> do

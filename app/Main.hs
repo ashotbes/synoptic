@@ -8,9 +8,9 @@ module Main where
 import           AskWeatherFromServer         ( askWeather )
 import           CheckDate                    ( checkDateFromUser )
 import           PrepareAnswer                ( prepareAnswer )
-import             Types.UserPhrases            ( UserPhrase (..) )
- 
-import           Network.HTTP.Simple          
+import           Types.UserPhrases            ( UserPhrase (..) )
+
+import           Network.HTTP.Simple          ( getResponseStatusCode )         
 import           Control.Exception            ( IOException, try )
 import qualified Data.ByteString       as B   ( readFile )
 import qualified Data.List             as L   ( find, filter ,lookup, intercalate )
@@ -75,6 +75,7 @@ main = do
     TIO.putStrLn $ messageChooseForecastDate phrasesForUser
     -- We need actual date to check user's date.
     currentTime <- getCurrentTime
+    print currentTime  
     dateFromUser <- Prelude.getLine
     correctDate <- case checkDateFromUser currentTime dateFromUser phrasesForUser of
         Left problemWithDate -> TIO.putStrLn problemWithDate >> exitFailure
